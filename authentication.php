@@ -26,7 +26,7 @@
             if ($users[0]['password'] !== $password ) {
                 $this->ajaxError();
             }
-            
+            unset($users[0]['password']);
             $this->ajaxResponse($users[0]);
         }
 
