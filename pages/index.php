@@ -16,7 +16,11 @@
             </li>
             <li class="login">
                 <a id="login" href="#">Đăng nhập</a>
-                <a id="" href="#">Đăng ký </a>               
+                <a id="" href="#">Đăng ký</a>               
+            </li>
+            <li class="user">
+                <a id="email" href="#"></a>
+                <a id="logout" href="#">Đăng xuất</a>               
             </li>
         </ul>
     </nav>
@@ -26,11 +30,11 @@
         <form class="form-container" >
             <h1>Login</h1>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <label for="username"><b>UserName</b></label>
+            <input id="username" type="text" placeholder="Enter Email" name="email" required>
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input id="password" type="password" placeholder="Enter Password" name="psw" required>
 
             <button type="button" id="btn-submit" class="btn">Login</button>
             <button class="btn cancel" onclick="closeForm()">Close</button>
