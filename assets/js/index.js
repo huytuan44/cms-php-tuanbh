@@ -1,18 +1,27 @@
 
 $(function() {
+  //login
   $('#login').on("click", function() {
     $(".form-login").css('display', 'block');
   });
   $('#login-form-exit').on("click", function() {
     $(".form-login").css('display', 'none');
   });
+  $('#login-form-submit').on('click', function() {
 
+  });
+
+  //sign up
   $('#signup').on("click", function() {
     $(".form-signup").css('display', 'block');
   });
   $('#signup-form-exit').on("click", function() {
     $(".form-signup").css('display', 'none');
   });
+  $('#login-form-submit').on('click', function() {
+
+  });
+
   // owl carousel script starts
   if ($("#main-banner-carousel").length) {
     $("#main-banner-carousel").owlCarousel({
