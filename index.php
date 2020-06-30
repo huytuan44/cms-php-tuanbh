@@ -8,7 +8,7 @@ switch ($pages[1]) {
         require __DIR__ . '/pages/home.php';
         break;
     case '':
-        require __DIR__ . '/pages/index.php';
+        require __DIR__ . '/pages/index.html';
         break;
     case 'about':
         require __DIR__ . '/pages/about.php';
