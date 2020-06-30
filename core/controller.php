@@ -1,9 +1,9 @@
 <?php
     abstract class Controller {
 
-        public function ajaxError() {
+        public function ajaxError($error = '') {
             $res = array(
-                "status" => 'error',
+                "status" => 'error: '.$error,
                 "code" => 401,
                 "data" => []
             );
@@ -11,9 +11,9 @@
             exit;
         }
 
-        public function ajaxResponse($data) {
+        public function ajaxResponse($status, $data = array()) {
             $res = array(
-                "status" => 'ok',
+                "status" => $status,
                 "code" => 200,
                 "data" => $data
             );
