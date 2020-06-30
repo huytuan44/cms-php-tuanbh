@@ -55,4 +55,12 @@
             
             $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
         }
+
+        public function editUser() {
+
+        }
+
+        public function deleteUser() {
+            
+        }
     }
