@@ -39,7 +39,6 @@ class Connection {
             $sql = $this->sql.$this->condition;
             $result = $this->conn->query($sql);
             $data = [];
-            // var_dump(mysqli_num_rows($result));die;
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;

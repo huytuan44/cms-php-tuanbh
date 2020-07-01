@@ -12,7 +12,10 @@
                 $this->ajaxError();
             }
             $conn = new Connection();
-            $posts = $conn->select('*', $this->table, null, $this->table.'.created_at desc')->join('user', 'user_id')->get();
+            $posts = $conn->select('*', $this->table, null, $this->table.'.created_at desc')
+                        ->join('user', 'user_id')
+                        ->join('channel', 'channel_id')
+                        ->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
@@ -24,7 +27,10 @@
             $channel_id = $this->request['channel_id'];
             $conn = new Connection();
             $where = "channel_id = {$channel_id}";
-            $posts = $conn->select('*', $this->table, $where, $this->table.'.created_at desc')->join('user', 'user_id')->get();
+            $posts = $conn  ->select('*', $this->table, $where, $this->table.'.created_at desc')
+                            ->join('user', 'user_id')
+                            ->join('channel', 'channel_id')
+                            ->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
@@ -36,7 +42,10 @@
             $post_id = $this->request['post_id'];
             $conn = new Connection();
             $where = "id = {$post_id}";
-            $posts = $conn->select('*', $this->table, $where)->join('user', 'user_id')->get();
+            $posts = $conn->select('*', $this->table, $where)
+                            ->join('user', 'user_id')
+                            ->join('channel', 'channel_id')
+                            ->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
