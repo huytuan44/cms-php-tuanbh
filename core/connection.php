@@ -46,20 +46,25 @@ class Connection {
     }
 
     public function insert($table, $collumns, $values) {
-        
-        $sql = "INSERT INTO ".DB_NAME.'.'.$table."(".implode(',',$collumns).") VALUES( '".implode("','", $values)."')";
-        
+        $now = date('Y-m-d H:i:s');
+        $values[] = $now;
+        $values[] = $now;    
+        $sql = "INSERT INTO ".DB_NAME.".{$table}( ".implode(', ',$collumns).", created_at, updated_at) VALUES('".implode("', '", $values)."')";
+            
         return $this->conn->query($sql);
     }
 
     public function update($table, $sets, $where) {
-        $sql = "UPDATE ".DB_NAME.'.'.$table." SET ".$sets." WHERE ".$where;
+        $now = date('Y-m-d H:i:s');
+        $sets[] = "updated_at = '{$now}'";
+        $sql = "UPDATE ".DB_NAME.'.'.$table." SET ".implode(', ',$sets)." WHERE ".$where;
         
         return $this->conn->query($sql);
     }
 
     public function delete($table, $where) {
         $sql = "DELETE FROM ".DB_NAME.'.'.$table.' WHERE '.$where;
+        
         return $this->conn->query($sql);
     }
     

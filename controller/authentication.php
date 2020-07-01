@@ -4,6 +4,7 @@
 
     class Authentication extends Controller {
         private $request = '';
+        private $table = 'user';
         public function __construct() {
             $this->request  = $_REQUEST;
         }
@@ -19,7 +20,7 @@
             }
 
             $conn = new Connection();
-            $users = $conn->select('*', 'user', "username = '{$username}'");
+            $users = $conn->select('*', $this->table, "username = '{$username}'");
             if (count($users) < 1) {
                 $this->ajaxError();
             }
@@ -37,30 +38,62 @@
             $username = $this->request['username'];
             $password = $this->request['password'];
             $email = $this->request['email'];
+            $age = $this->request['age'];
+            $gender = $this->request['gender'];
             if(empty($username) || empty($password) || empty($email)) {
                 $this->ajaxError();
             }
 
             $conn = new Connection();
-            $collumns = array('username', 'password', 'email', 'created_date', 'updated_date');
-            $now = date('Y-m-d H:i:s');
+            $collumns = array('username', 'password', 'email', 'age', 'gender');
             $user = array(
                 $username,
                 $password,
                 $email,
-                $now,
-                $now
+                $age,
+                $gender
             );
-            $results = $conn->insert('user', $collumns, $user);
+            $results = $conn->insert($this->table, $collumns, $user);
             
             $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
         }
 
         public function editUser() {
+            if($_SERVER['REQUEST_METHOD'] != 'POST') {
+                $this->ajaxError();
+            }
+            $user_id = $this->request['id'];
+            $username = $this->request['username'];
+            $password = $this->request['password'];
+            $email = $this->request['email'];
+            $age = $this->request['age'];
+            $gender = $this->request['gender'];
+            if(empty($username) || empty($password) || empty($email)) {
+                $this->ajaxError();
+            }
 
+            $conn = new Connection();
+            $sets = array(
+                "username = '{$username}'",
+                "password = '{$password}'",
+                "email = '{$email}'",
+                "age ={$age}",
+                "gender = {$gender}"
+            );
+            $where = "id = {$user_id}";
+            $results = $conn->update($this->table, $sets, $where);
+            
+            $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
         }
 
         public function deleteUser() {
+            if($_SERVER['REQUEST_METHOD'] != 'POST') {
+                $this->ajaxError();
+            }
+            $user_id = $this->request['id'];
+            $conn = new Connection();
+            $results = $conn->delete($this->table, "id = {$user_id}");
             
+            $results ? $this->ajaxResponse('delete success!') : $this->ajaxError('delete error!');
         }
     }
