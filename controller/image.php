@@ -1,7 +1,7 @@
 <?php
     include('./core/controller.php');
     include('./core/connection.php');
-    class Post extends Controller {
+    class Image extends Controller {
         public function getImages() {
 
         }

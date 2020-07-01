@@ -53,6 +53,7 @@ CREATE TABLE `comment` (
   `parrent_comment` int(11) DEFAULT NULL,
   `content` text COLLATE utf8mb4_unicode_520_ci,
   `user_id` int(11) DEFAULT NULL,
+  `post_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -79,8 +80,8 @@ CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `imagecol` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `user_id` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `channel_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -165,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-01 16:46:57
+-- Dump completed on 2020-07-01 17:34:04
