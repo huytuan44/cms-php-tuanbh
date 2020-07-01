@@ -20,7 +20,7 @@
             }
 
             $conn = new Connection();
-            $users = $conn->select('*', $this->table, "username = '{$username}'");
+            $users = $conn->select('*', $this->table, "username = '{$username}'")->get();
             if (count($users) < 1) {
                 $this->ajaxError();
             }
@@ -45,6 +45,16 @@
             }
 
             $conn = new Connection();
+
+            //get old username and check new user was existed
+            $oldUser = $conn->select('username',$this->table)->get();
+            $listUsername = [];
+            foreach($oldUser as $user) {
+                $listUsername[] = $user['username'];
+            }
+            if(in_array($username, $listUsername)) {
+                $this->ajaxError('username was existed!');
+            }
             $collumns = array('username', 'password', 'email', 'age', 'gender');
             $user = array(
                 $username,

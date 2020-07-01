@@ -2,13 +2,17 @@
     include('./core/controller.php');
     include('./core/connection.php');
     class Post extends Controller {
-        private $table = "post";
+        private $request = '';
+        private $table = 'post';
+        public function __construct() {
+            $this->request  = $_REQUEST;
+        }
         public function getPosts() {
             if($_SERVER['REQUEST_METHOD'] != 'GET') {
                 $this->ajaxError();
             }
             $conn = new Connection();
-            $posts = $conn->select('*', $this->table, null, 'created_at desc');
+            $posts = $conn->select('*', $this->table, null, $this->table.'.created_at desc')->join('user', 'user_id')->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
@@ -20,7 +24,7 @@
             $channel_id = $this->request['channel_id'];
             $conn = new Connection();
             $where = "channel_id = {$channel_id}";
-            $posts = $conn->select('*', $this->table, $where, 'created_at desc');
+            $posts = $conn->select('*', $this->table, $where, $this->table.'.created_at desc')->join('user', 'user_id')->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
@@ -32,7 +36,7 @@
             $post_id = $this->request['post_id'];
             $conn = new Connection();
             $where = "id = {$post_id}";
-            $posts = $conn->select('*', $this->table, $where);
+            $posts = $conn->select('*', $this->table, $where)->join('user', 'user_id')->get();
             
             $this->ajaxResponse('get posts success', $posts);
         }
@@ -46,10 +50,10 @@
             $img_url = $this->request['img_url'];
             $user_id = $this->request['user_id'];
             $channel_id = $this->request['channel_id'];
-            if(empty($username) || empty($password) || empty($email)) {
+            if(empty($title) || empty($user_id) || empty($channel_id)) {
                 $this->ajaxError();
             }
-
+            
             $conn = new Connection();
             $collumns = array('title', 'content', 'img_url', 'user_id', 'channel_id');
             $post = array(
@@ -73,7 +77,7 @@
             $content = $this->request['content'];
             $img_url = $this->request['img_url'];
             $channel_id = $this->request['channel_id'];
-            if(empty($username) || empty($password) || empty($email)) {
+            if(empty($title) || empty($user_id) || empty($channel_id)) {
                 $this->ajaxError();
             }
 

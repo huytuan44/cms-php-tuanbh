@@ -7,7 +7,9 @@ define('DB_NAME', 'test');
 
 class Connection {
     public $conn;
-
+    private $sql;
+    private $firstTable;
+    private $condition = '';
     public function __construct() {
         $this->conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
         if($this->conn->connect_errno) {
@@ -20,19 +22,24 @@ class Connection {
         
 
         $sql = "SELECT {$select} FROM ".DB_NAME.".{$table}";
-    
         if (!empty($where)) {
-            $sql .= " WHERE {$where}";
+            $this->condition .= " WHERE {$where}";
         }
         if (!empty($orderBy)) {
-            $sql .= "ORDER BY {$orderBy}";
+            $this->condition .= " ORDER BY {$orderBy}";
         }
-        
+        $this->sql = $sql;
+        $this->firstTable = $table;
+
+        return $this;
+    }
+
+    public function get() {
         try {
-            var_dump($sql);die;
+            $sql = $this->sql.$this->condition;
             $result = $this->conn->query($sql);
             $data = [];
-            var_dump(mysqli_num_rows($result));die;
+            // var_dump(mysqli_num_rows($result));die;
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;
@@ -43,6 +50,13 @@ class Connection {
         } catch (Exception $ex) {
             echo $ex; exit;
         }
+    }
+    
+    public function join($table, $by)
+    {
+        $this->sql .= " INNER JOIN ".DB_NAME.".{$table} ON ".DB_NAME.".{$table}.id = ".DB_NAME.".{$this->firstTable}.{$by}";
+
+        return $this;
     }
 
     public function insert($table, $collumns, $values) {

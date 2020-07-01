@@ -1,5 +1,5 @@
 <?php
-    include("../controller/authentication.php");
-    include("../controller/authorization.php");
+    include("./controller/post.php");
+    include("./controller/authorization.php");
     $post = new Post();
     $post->createPost();
