@@ -1,18 +1,18 @@
 (function ($) {
     'use strict' 
-    var posts = [];
-    var htmlPosts = '';
+    var images = [];
+    var htmlImages = '';
     $.ajax({
         type: 'GET',
-        url: 'https://cms-php.local/api/getPost',
+        url: 'https://cms-php.local/api/getImage',
         success: function(res) {
             let response = JSON.parse(res);
             if (response.code === 200) {
-                posts = response.data;
-                posts.forEach(item => {
-                    htmlPosts += renderPost(item);
+                images = response.data;
+                images.forEach(item => {
+                    htmlImages += renderImage(item);
                 });
-                $('#post-data').html(htmlPosts)
+                $('#image-data').html(htmlImages)
             } 
             console.log(response.status)    
         },
@@ -20,20 +20,19 @@
         }
     });
 
-    function renderPost(post) {
+    function renderImage(image) {
         return `<tr>
-                <td>${post.id}</td>
-                <td>${post.title}</td>
-                <td>${post.content}</td>
-                <td>${post.img_url}</td>
-                <td>${post.username}</td>
-                <td>${post.channel_name}</td>
-                <td>${post.created_at}</td>
-                <td>${post.updated_at}</td>
-                <td>
-                <a class="btn btn-info btn-sm" href="#" data-post-id=${post.id}><i class="fas fa-pencil-alt"></i>Edit</a>
-                <a class="btn btn-danger btn-sm" href="#" data-post-id=${post.id}><i class="fas fa-trash"></i>Delete</a>
-                </td>
-            </tr>`
+                    <td>${image.id}</td>
+                    <td>${image.title}</td>
+                    <td>${image.url}</td>
+                    <td>${image.username}</td>
+                    <td>${image.channel_name}</td>
+                    <td>${image.created_at}</td>
+                    <td>${image.updated_at}</td>
+                    <td>
+                    <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#editImage" data-image-id=${image.id} href="#" ><i class="fas fa-pencil-alt"></i>Edit</a>
+                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteImage" data-image-id=${image.id} href="#"><i class="fas fa-trash"></i>Delete</a>
+                    </td>
+                </tr>`
     }
 })(jQuery)

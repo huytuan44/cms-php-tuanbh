@@ -66,43 +66,43 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/home" class="nav-link">
-                  <i class="nav-icon fas fa-home"></i>
-                  <p>
-                    Home
-                    <!-- <i class="right fas fa-angle-left"></i> -->
-                  </p>
-                </a>
-              </li>
-               <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/user" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    User
-                    <!-- <i class="right fas fa-angle-left"></i> -->
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="//cms-php.local/admin/post" class="nav-link">
-                  <i class="nav-icon fas fa-rss"></i>
-                  <p>
-                    Posts
-                    <!-- <span class="right badge badge-danger">New</span> -->
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/image" class="nav-link active">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>
-                    Images
-                    <!-- <i class="fas fa-angle-left right"></i>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/home" class="nav-link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Home
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/user" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="//cms-php.local/admin/post" class="nav-link">
+                <i class="nav-icon fas fa-rss"></i>
+                <p>
+                  Posts
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/image" class="nav-link active">
+                <i class="nav-icon fas fa-image"></i>
+                <p>
+                  Images
+                  <!-- <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right">6</span> -->
-                  </p>
-                </a>
-              </li>
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -117,17 +117,75 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>User</h1>
+              <h1>Image</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                <li class="breadcrumb-item active">User</li>
+                <li class="breadcrumb-item active">Image</li>
               </ol>
             </div>
           </div>
         </div><!-- /.container-fluid -->
       </section>
+
+      <!-- modal delete  -->
+      <div class="modal fade" id="deleteImage">
+        <div class="modal-dialog">
+          <div class="modal-content bg-secondary">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <p>Bạn xác nhận xóa ảnh này chứ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Dừng</button>
+              <button type="button" class="btn btn-outline-light">Đồng ý</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.close modal delete -->
+
+      <!-- modal edit post  -->
+      <div class="modal fade" id="editImage">
+        <div class="modal-dialog">
+          <div class="modal-content bg-secondary">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Title: </label>
+                <input type="text" id="inputEstimatedBudget" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">Url: </label>
+                <input type="text" id="inputSpentBudget" class="form-control">
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputSpentBudget"> Channel: </label>
+                    <select class="form-control">
+                      <option>Khoa học</option>
+                      <option>Đời sống</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Dừng</button>
+              <button type="button" class="btn btn-outline-light">Lưu</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.close modal edit -->
 
       <!-- Main content -->
       <section class="content">
@@ -195,7 +253,7 @@
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="image-data">
                       <tr>
                         <td>1</td>
                         <td>test ảnh</td>
@@ -255,6 +313,7 @@
   <script src="../assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../assets/dist/js/demo.js"></script>
+  <script src="../assets/js/admin/image.js"></script>
   <!-- page script -->
   <script>
     $(function () {
