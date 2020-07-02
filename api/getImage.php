@@ -3,7 +3,7 @@
     include("./controller/authorization.php");
     $image = new Image();
     if(!empty($_REQUEST['image_id'])) {
-        $post->getImage();
+        $image->getImage();
         exit;
     }
     $image->getImages();

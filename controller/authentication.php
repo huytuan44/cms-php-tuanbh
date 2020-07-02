@@ -1,6 +1,7 @@
 <?php
     include('./core/controller.php');
     include('./core/connection.php');
+    include('authorization.php');
 
     class Authentication extends Controller {
         private $request = '';
@@ -66,6 +67,22 @@
             $results = $conn->insert($this->table, $collumns, $user);
             
             $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
+        }
+
+        public function getUsers() {
+            if($_SERVER['REQUEST_METHOD'] != 'GET') {
+                $this->ajaxError();
+            }
+
+            $conn = new Connection();
+            $users = $conn->select('*',$this->table)->get();
+            $authoz = new Authorization();
+
+            foreach($users as $key => $value) {
+                unset($users[$key]['password']);
+                $users[$key]['type'] = $authoz->checkAdmin($value) ? 'admin' : 'user'; 
+            }
+            $this->ajaxResponse('get users success', $users);
         }
 
         public function editUser() {

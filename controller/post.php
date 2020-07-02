@@ -41,7 +41,7 @@
             }
             $post_id = $this->request['post_id'];
             $conn = new Connection();
-            $where = "id = {$post_id}";
+            $where = $this->table.".id = {$post_id}";
             $posts = $conn->select('*', $this->table, $where)
                             ->join('user', 'user_id')
                             ->join('channel', 'channel_id')
@@ -100,7 +100,7 @@
             $where = "id = {$post_id}";
             $results = $conn->update($this->table, $sets, $where);
             
-            $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
+            $results ? $this->ajaxResponse('edit post success') : $this->ajaxError('edit post error');
         }
 
         public function deletePost() {
