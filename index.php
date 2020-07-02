@@ -3,7 +3,7 @@ define('BASE_URL', 'https://cms-php.local/');
 $request = $_SERVER['REQUEST_URI'];
 
 $path = explode("/", $request);
-$pages = explode("?", $path[2])[0]; 
+$pages = explode("?", $path[2])[0];
 switch ($path[1]) {
     case 'home':
         require __DIR__ . '/pages/home.php';
@@ -17,6 +17,9 @@ switch ($path[1]) {
     case 'api':
         require __DIR__ . '/api/'.$pages.'.php';
         break;
+    case 'admin':  
+        require __DIR__ . '/pages/admin/'.$pages.'.html';
+        break;   
     default:
         require __DIR__ . '/pages/404.php';
         break;
