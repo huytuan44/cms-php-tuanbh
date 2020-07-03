@@ -85,11 +85,28 @@
             $this->ajaxResponse('get users success', $users);
         }
 
+        public function getUser() {
+            if($_SERVER['REQUEST_METHOD'] != 'GET') {
+                $this->ajaxError();
+            }
+            $user_id = $this->request['user_id'];
+            $conn = new Connection();
+            $where = "id = ${user_id}";
+            $users = $conn->select('*',$this->table, $where)->get();
+            $authoz = new Authorization();
+
+            foreach($users as $key => $value) {
+                unset($users[$key]['password']);
+                $users[$key]['type'] = $authoz->checkAdmin($value) ? 'admin' : 'user'; 
+            }
+            $this->ajaxResponse('get users success', $users);
+        }
+
         public function editUser() {
             if($_SERVER['REQUEST_METHOD'] != 'POST') {
                 $this->ajaxError();
             }
-            $user_id = $this->request['id'];
+            $user_id = $this->request['user_id'];
             $username = $this->request['username'];
             $password = $this->request['password'];
             $email = $this->request['email'];
@@ -110,14 +127,14 @@
             $where = "id = {$user_id}";
             $results = $conn->update($this->table, $sets, $where);
             
-            $results ? $this->ajaxResponse('signup success') : $this->ajaxError('signup error');
+            $results ? $this->ajaxResponse('updated success') : $this->ajaxError('updated error');
         }
 
         public function deleteUser() {
             if($_SERVER['REQUEST_METHOD'] != 'POST') {
                 $this->ajaxError();
             }
-            $user_id = $this->request['id'];
+            $user_id = $this->request['user_id'];
             $conn = new Connection();
             $results = $conn->delete($this->table, "id = {$user_id}");
             

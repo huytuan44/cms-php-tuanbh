@@ -2,10 +2,11 @@
     include('./core/controller.php');
     include('./core/connection.php');
     class Image extends Controller {
-        private $request = '';
+        private $request = [];
         private $table = 'image';
         public function __construct() {
             $this->request  = $_REQUEST;
+            $this->file = $_FILES; 
         }
 
         public function getImages() {

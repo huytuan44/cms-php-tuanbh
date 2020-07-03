@@ -66,43 +66,43 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/home" class="nav-link">
-                  <i class="nav-icon fas fa-home"></i>
-                  <p>
-                    Home
-                    <!-- <i class="right fas fa-angle-left"></i> -->
-                  </p>
-                </a>
-              </li>
-               <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/user" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    User
-                    <!-- <i class="right fas fa-angle-left"></i> -->
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="//cms-php.local/admin/post" class="nav-link active">
-                  <i class="nav-icon fas fa-rss"></i>
-                  <p>
-                    Posts
-                    <!-- <span class="right badge badge-danger">New</span> -->
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="//cms-php.local/admin/image" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>
-                    Images
-                    <!-- <i class="fas fa-angle-left right"></i>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/home" class="nav-link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Home
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/user" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="//cms-php.local/admin/post" class="nav-link active">
+                <i class="nav-icon fas fa-rss"></i>
+                <p>
+                  Posts
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="//cms-php.local/admin/image" class="nav-link">
+                <i class="nav-icon fas fa-image"></i>
+                <p>
+                  Images
+                  <!-- <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right">6</span> -->
-                  </p>
-                </a>
-              </li>
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -140,7 +140,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Dừng</button>
-              <button type="button" class="btn btn-outline-light">Đồng ý</button>
+              <button type="button" id="submitDeletePost" class="btn btn-outline-light">Đồng ý</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -151,60 +151,45 @@
 
       <!-- modal edit post  -->
       <div class="modal fade" id="editPost">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content bg-secondary">
             <div class="modal-body">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <div class="form-group">
-                  <label for="strTitle">Title: </label>
-                  <input type="text" id="strTitle" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="strContent">Content: </label>
-                  <textarea rows="3" id="strContent"  class="form-control"></textarea>
-                </div>
                 <div class="row">
                   <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="strTitle">Title: </label>
+                      <input type="text" id="editTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="strContent">Content: </label>
+                      <textarea rows="4" id="editContent" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="createChannel"> Channel: </label>
+                      <select class="form-control select-channel" id="editChannel">
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="image">Image: </label>
+                      <a href=""><label for="uploadEditImage">Tải ảnh lên </label></a>
                       <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="image">
-                          <label class="custom-file-label" for="image">Choose file</label>
+                        <div class="custom-file" style="height: 110px; flex-direction: column;">
+                          <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="uploadEditImage"
+                            style="display: none;">
+                            <img id="showEditImage" height="120px" class="img-responsive" alt="Photo" />
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="inputSpentBudget"> Channel: </label>
-                      <select class="form-control" id="select-channel">
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="age">Age: </label>
-                      <input type="number" id="age" max="150" min="0" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="inputSpentBudget"> Gender: </label>
-                      <select class="form-control">
-                        <option value="0">Nam</option>
-                        <option value="1">Nữ</option>
-                      </select>
                     </div>
                   </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Dừng</button>
-              <button type="button" class="btn btn-outline-light">Lưu</button>
+              <button type="button" id="editSubmit" class="btn btn-outline-light">Lưu</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -220,7 +205,7 @@
             <div class="col-12">
 
               <!-- form  -->
-              <div class="card card-secondary collapsed-card">
+              <div class="card card-secondary">
                 <div class="card-header">
                   <h3 class="card-title">Create Post</h3>
 
@@ -231,38 +216,40 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="strTitle">Title: </label>
-                    <input type="text" id="strTitle" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="strContent">Content: </label>
-                    <textarea rows="3" id="strContent"  class="form-control"></textarea>
-                  </div>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label for="image">Image: </label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="image">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                          </div>
-                        </div>
+                        <label for="strTitle">Title: </label>
+                        <input type="text" id="createTitle" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="strContent">Content: </label>
+                        <textarea rows="4" id="createContent" class="form-control"></textarea>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label for="inputSpentBudget"> Channel: </label>
-                        <select class="form-control" id="select-channel">
+                        <label for="createChannel"> Channel: </label>
+                        <select class="form-control select-channel" id="createChannel">
                         </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="image">Image: </label>
+                        <a href="" id="lbImage"><label for="uploadImage">Tải ảnh lên </label></a>
+                        <div class="input-group">
+                          <div class="custom-file" style="height: 110px; flex-direction: column;">
+                            <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="uploadImage"
+                              style="display: none;">
+                              <img id="showImage" height="120px" class="img-responsive" alt="Photo" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" id="submitCreatePost" class="btn btn-primary">Submit</button>
                   <button type="submit" class="btn btn-default float-right">Cancel</button>
                 </div>
               </div>
@@ -344,15 +331,6 @@
         "responsive": true,
         "autoWidth": false,
       });
-      // $('#example2').DataTable({
-      //   "paging": true,
-      //   "lengthChange": false,
-      //   "searching": false,
-      //   "ordering": true,
-      //   "info": true,
-      //   "autoWidth": false,
-      //   "responsive": true,
-      // });
     });
   </script>
 </body>

@@ -7,6 +7,7 @@
                 "code" => 401,
                 "data" => []
             );
+            header('Content-type: application/json');
             echo json_encode($res);
             exit;
         }
@@ -17,6 +18,7 @@
                 "code" => 200,
                 "data" => $data
             );
+            header('Content-type: application/json');
             echo json_encode($res);
         }
     } 
