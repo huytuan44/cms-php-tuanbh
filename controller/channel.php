@@ -24,8 +24,10 @@
             $conn = new Connection();
             $channel_id = $this->request['channel_id'];
             $where = $this->table.".id = {$channel_id}";
-            $posts = $conn->select('*', $this->table, $where)->get();
+            $channel = $conn->select('*', $this->table, $where)->get();
+            $postsByChannel = $conn->select('*', 'post', "channel_id={$channel_id}")->get();
+            $channel['posts'] = $postsByChannel;
             
-            $this->ajaxResponse('get channel success', $posts);
+            $this->ajaxResponse('get channel success', $channel);
         }
     }

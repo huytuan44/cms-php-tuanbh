@@ -44,7 +44,8 @@ class Connection {
                     $data[] = $row;
                 }
             }
-
+            $this->sql = '';
+            $this->condition = '';
             return $data;
         } catch (Exception $ex) {
             echo $ex; exit;
