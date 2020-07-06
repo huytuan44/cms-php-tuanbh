@@ -1,16 +1,18 @@
 <?php
 define('BASE_URL', 'https://cms-php.local/');
 $request = $_SERVER['REQUEST_URI'];
-
 $path = explode("/", $request);
-$pages = explode("?", $path[2])[0];
+if (count($path) > 2) {
+    $pages = explode("?", $path[2])[0];
+}
 if (strpos($path[1], '?')) 
 { 
     $path[1] = substr($path[1], 0, strpos($path[1], '?')); 
 }
+
 switch ($path[1]) {
-    case 'home':
-        require __DIR__ . '/pages/home.php';
+    case '':
+        require __DIR__ . '/pages/index.html';
         break;
     case 'post':
         require __DIR__ . '/pages/post.html';
@@ -18,9 +20,6 @@ switch ($path[1]) {
     case 'channel':
         require __DIR__ . '/pages/channel.html';
         break;        
-    case '':
-        require __DIR__ . '/pages/index.html';
-        break;
     case 'about':
         require __DIR__ . '/pages/about.php';
         break;

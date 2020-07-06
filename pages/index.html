@@ -28,48 +28,131 @@
   </head>
 
   <body>
-    <!-- form đăng nhập -->
-    <div class="form-login">
-      <form>
-        <fieldset>
-            <legend>Đăng nhập</legend>
-            <lable for="email"> Email:</lable> <br>
-            <input type="text" id="login-email" placeholder="email"><br>
-            <br>
-            <lable for="password">Mật khẩu:</lable> <br>
-            <input type="text" id="login-password" placeholder="password"><br>
-            <br>
-            <p><input type ='button' id="login-form-submit" value= "Đăng nhập"><input id="login-form-exit" type="button" value="Thoát" ></p>
-        </fieldset>
-    </form>
-    </div>
-
-    <!-- form đăng ký -->
-    <div class="form-signup">
-      <form>
-        <fieldset>
-            <legend>Đăng ký tài khoản</legend>
-            <lable for="name">Họ và tên:</lable> <br>
-            <input type="text" id="signup-firstname" placeholder="name"><br>
-            <BR>
-            <lable for="email"> Email:</lable> <br>
-            <input type="text" id="signup-email" placeholder="email"><br>
-            <br>
-            <lable for="password">Mật khẩu:</lable> <br>
-            <input type="text" id="signup-password" placeholder="password"><br>
-            <br>
-            Giới tính:<br>
-            <input type = Radio name="control" value="1" checked>Nam 
-            <input type = Radio name="control" value="0" checked>Nữ 
-            <BR>
-            <BR>
-            <lable for="age">Tuổi:</lable> <BR>
-            <input type="text" id="age" placeholder="age">
-            <p><input type =submit value= "Đăng ký"> <a href="#"><input type="button" id="signup-form-exit" value="Thoát" ></a></p>
     
+    <div class="modal-custom" id="modal">
+      <!-- form đăng nhập -->
+      <div class="form-login">
+        <fieldset>
+          <legend>Đăng nhập</legend>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="username">Username:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" id="login-username" placeholder="Username ..." style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="password">Mật khẩu:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="password" id="login-password" placeholder="Password ..." style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-2" style="align-items: center; flex-direction: column;">
+            <p><input type ='button' id="login-form-submit" value= "Đăng nhập"><input id="login-form-exit" type="button" value="Thoát" ></p>
+          </div>
         </fieldset>
-    </form>
+      </div>
+
+       <!-- form đăng ký -->
+      <div class="form-signup">
+        <fieldset>
+          <legend>Đăng ký tài khoản</legend>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="name">Họ và tên:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" id="signup-firstname" placeholder="name" style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="email"> Email:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" id="signup-email" placeholder="email" style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="password">Mật khẩu:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="password" id="signup-password" placeholder="password" style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="gender">Giới tính:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type = Radio name="control" value="1" checked>Nam 
+              <input type = Radio name="control" value="0" checked>Nữ 
+            </div>
+          </div> 
+          <div class="row p-1">
+            <div class="col-sm-4">
+              <lable for="age">Tuổi:</lable>
+            </div>
+            <div class="col-sm-8">
+              <input type="number" id="age" placeholder="age" style="width: 80%">
+            </div>
+          </div>
+          <div class="row p-2" style="align-items: center; flex-direction: column;">
+            <p><input type =submit value= "Đăng ký"> <a href="#"><input type="button" id="signup-form-exit" value="Thoát" ></a></p>
+          </div>
+        </fieldset>
+      </div>
+      <div class="form-create-post">
+        <fieldset>
+          <legend>Tạo bài viết mới</legend>
+          <div class="row">
+            <div class="col-sm-2">
+              <lable for="title-post">Tiêu đề:</lable> 
+            </div>
+            <div class="col-sm-10">
+              <input type="text" id="title-post" placeholder="Nhập tên bài viết" style="width: 80%;">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-2">
+              <lable for="content-post">Nội dung:</lable> 
+            </div>
+            <div class="col-sm-10">
+              <textarea type="text" id="content-post" placeholder="Nhập nội dung" rows="10" style="width: 100%;"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-2">
+              <lable for="image-post">Ảnh minh họa:</lable> 
+            </div>
+            <div class="col-sm-8">
+              <a href=""><label for="upload-image-post">Tải ảnh lên </label></a>
+              <div class="input-group">
+                <div class="custom-file" style="height: 200px; flex-direction: column;">
+                  <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="upload-image-post"
+                    style="display: none;">
+                    <img id="show-image-post" height="120px" class="img-responsive" alt="Photo" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row" style="flex-direction: column; align-items: center;">
+            <p><input type =submit value= "Tạo mới"> <a href="#"><input type="button" class="modal-exit" value="Thoát" ></a></p>
+          </div>
+          
+        </fieldset>
+      </div>
     </div>
+    
+
+   
 
 
     <div class="container-scroller">
@@ -89,43 +172,6 @@
                     <!-- <img src="assets/images/logo.svg" alt=""/> -->
                   </a>
                 </div>
-                <!-- <div class="d-flex"> -->
-                  <!-- <ul class="navbar-right">
-                    <li>
-                      <a href="#">ENGLISH</a>
-                    </li>
-                    <li>
-                      <a href="#">ESPAÑOL</a>
-                    </li>
-                  </ul> -->
-                  <!-- <ul class="social-media">
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-instagram"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-youtube"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-linkedin"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-twitter"></i>
-                      </a>
-                    </li>
-                  </ul> -->
-                <!-- </div> -->
               </div>
               <div class="navbar-bottom-menu">
                 <button
@@ -154,42 +200,24 @@
                     <li class="nav-item active">
                       <a class="nav-link active" href="">Trang chủ</a>
                     </li>
-                    <!-- <li class="nav-item">
-                      <a class="nav-link" href="pages/dangnhap.html">Đăng nhập</a>
+                    <li class="nav-item login-success" id='admin-page'>
+                      <a class="nav-link" href="admin/home">Admin</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/dangky.html">Đăng ký</a>
-                    </li> -->
-                    <li class="nav-item">
+                    <li class="nav-item login-success">
+                      <a class="nav-link" id="create-post" href="#">Tạo bài viết mới</a>
+                    </li>
+                    <li class="nav-item login-success">
+                      <a class="nav-link" id="upload-image" href="#">Tải ảnh mới</a>
+                    </li> 
+                    <li class="nav-item unlogin">
                       <a class="nav-link" id="login" href="#">Đăng nhập</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item unlogin">
                       <a class="nav-link" id="signup" href="#">Đăng ký</a>
                     </li>
-                    <!-- <li class="nav-item">
-                      <a class="nav-link" href="pages/news-post.html">Blog</a>
+                    <li class="nav-item login-success">
+                      <a class="nav-link" id="logout" href="#">Đăng xuất</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/business.html">Business</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/sports.html">Sports</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/art.html">Art</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/politics.html">Politics</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/real-estate.html">Real estate</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">Travel</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                      <a class="nav-link" href="#"><i class="mdi mdi-magnify"></i></a>
-                    </li> -->
                   </ul>
                 </div>
               </div>
@@ -316,7 +344,7 @@
                       <img src="assets/images/dashboard/banner_2.jpg" alt="" />
                     </div>
                   </div>
-                </div> -->
+                </div> 
                 <div class="item">
                   <div class="carousel-content-wrapper mb-2">
                     <div class="carousel-content">
@@ -718,18 +746,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col-lg-3">
-                <div class="position-relative mb-3">
-                  <img
-                    src="assets/images/dashboard/star-magazine-15.jpg"
-                    class="img-fluid"
-                    alt="world-news"
-                  />
-                  <div class="video-thumb text-muted">
-                    <span><i class="mdi mdi-menu-right"></i></span>LIVE
-                  </div>
-                </div> -->
-                <!-- <div class="row">
                   <div class="col-sm-12">
                     <div class="d-flex position-relative float-left">
                       <h3 class="section-title">Latest News</h3>
@@ -787,15 +803,11 @@
                       </p>
                     </div>
                   </div>
-                </div> -->
+                </div> 
               </div>
             </div>
           </div>
         </div> 
-        <!-- main-panel ends -->
-        <!-- container-scroller ends -->
-
-        <!-- partial:partials/_footer.html -->
         <footer>
           <!-- <div class="container">
             <div class="row">
@@ -849,10 +861,6 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="d-flex justify-content-between">
-                  <!-- <h1><a class="navbar-brand" href="#"></a>SWEN</h1> -->
-                  <!-- <img src="assets/images/logo.svg" class="footer-logo" alt="" /> -->
-
-                  <!-- <div class="d-flex justify-content-end footer-social">
                     <h5 class="m-0 font-weight-600 mr-3 d-none d-lg-flex">Follow on</h5>
                     <ul class="social-media">
                       <li>
@@ -881,7 +889,7 @@
                         </a>
                       </li>
                     </ul>
-                  </div> -->
+                  </div> 
                 </div>
               </div>
             </div>
@@ -892,12 +900,6 @@
                 >
                   <ul class="footer-horizontal-menu">
                     <li><a href="#">SWEN</a></li>
-                    <!-- <li><a href="#">Privacy Policy.</a></li>
-                    <li><a href="#">Accessibility & CC.</a></li>
-                    <li><a href="#">AdChoices.</a></li>
-                    <li><a href="#">Advertise with us Transcripts.</a></li>
-                    <li><a href="#">License.</a></li>
-                    <li><a href="#">Sitemap</a></li> -->
                   </ul>
                   <p class="font-weight-medium">
                   Hà Nội, 06/2020  
@@ -919,6 +921,7 @@
     <!-- End plugin js for this page -->
     <!-- Custom js for this page-->
     <script src="../assets/js/index.js"></script>
+    <script src="../assets/js/auth.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>

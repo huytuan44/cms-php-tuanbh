@@ -30,4 +30,22 @@
             
             $this->ajaxResponse('get channel success', $channel);
         }
+
+        public function createChannel() {
+            if($_SERVER['REQUEST_METHOD'] != 'POST') {
+                $this->ajaxError();
+            }
+            $channel = $this->request['channel'];
+            if(empty($channel)) {
+                $this->ajaxError();
+            }
+            $conn = new Connection();
+            $collumns = array('channel_name');
+            $channels = array(
+                $channel
+            );
+            $results = $conn->insert($this->table, $collumns, $channels);
+            
+            $results ? $this->ajaxResponse('created channel success') : $this->ajaxError('created channel error');
+        }
     }

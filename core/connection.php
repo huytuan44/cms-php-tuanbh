@@ -37,7 +37,7 @@ class Connection {
     public function get() {
         try {
             $sql = $this->sql.$this->condition;
-            $result = $this->conn->query($sql);
+            $result = $this->conn->query(strip_tags($sql));
             $data = [];
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
@@ -65,7 +65,7 @@ class Connection {
         $values[] = $now;    
         $sql = "INSERT INTO ".DB_NAME.".{$table}( ".implode(', ',$collumns).", created_at, updated_at) VALUES('".implode("', '", $values)."')";
             
-        return $this->conn->query($sql);
+        return $this->conn->query(strip_tags($sql));
     }
 
     public function update($table, $sets, $where) {
@@ -73,13 +73,13 @@ class Connection {
         $sets[] = "updated_at = '{$now}'";
         $sql = "UPDATE ".DB_NAME.'.'.$table." SET ".implode(', ',$sets)." WHERE ".$where;
         
-        return $this->conn->query($sql);
+        return $this->conn->query(strip_tags($sql));
     }
 
     public function delete($table, $where) {
         $sql = "DELETE FROM ".DB_NAME.'.'.$table.' WHERE '.$where;
         
-        return $this->conn->query($sql);
+        return $this->conn->query(strip_tags($sql));
     }
     
     public function __destruct()

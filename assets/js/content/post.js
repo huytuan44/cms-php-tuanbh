@@ -10,6 +10,21 @@
         window.location.href = 'http://cms-php.local';
     } else {
         $.ajax({
+            url: 'http://cms-php.local/api/getChannel',
+            type: 'GET',
+            success: function(res) {
+                if (res.code == 200) {
+                    var channels = res.data;
+                    var html = '';
+                    channels.forEach((item) => {
+                        html += renderChannel(item);
+                    })
+                    $('#list-channel').html(html);
+                }
+            }
+        })
+
+        $.ajax({
             url: 'http://cms-php.local/api/getPost',
             type: 'GET',
             data: {
@@ -33,6 +48,12 @@
                 }
             }
         })
+
+        renderChannel = function(channel) {
+            return ` <li class="nav-item">
+            <a class="nav-link" href="channel?id=${channel.id}">${channel.channel_name}</a>
+          </li>`
+        }
     }
     
 })(jQuery)

@@ -25,11 +25,14 @@
             if (count($users) < 1) {
                 $this->ajaxError();
             }
-            if ($users[0]['password'] !== $password ) {
+            $user = $users[0];
+            if ($user['password'] !== $password ) {
                 $this->ajaxError();
             }
-            unset($users[0]['password']);
-            $this->ajaxResponse('login success', $users[0]);
+            $authoz = new Authorization();
+            $user['type'] = $authoz->checkAdmin($user) ? 'admin' : 'user'; 
+            unset($user['password']);
+            $this->ajaxResponse('login success', $user);
         }
 
         public function register() {

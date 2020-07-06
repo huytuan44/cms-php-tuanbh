@@ -1,26 +1,5 @@
 
 $(function() {
-  //login
-  $('#login').on("click", function() {
-    $(".form-login").css('display', 'block');
-  });
-  $('#login-form-exit').on("click", function() {
-    $(".form-login").css('display', 'none');
-  });
-  $('#login-form-submit').on('click', function() {
-
-  });
-
-  //sign up
-  $('#signup').on("click", function() {
-    $(".form-signup").css('display', 'block');
-  });
-  $('#signup-form-exit').on("click", function() {
-    $(".form-signup").css('display', 'none');
-  });
-  $('#login-form-submit').on('click', function() {
-
-  });
 
   // owl carousel script starts
   if ($("#main-banner-carousel").length) {
@@ -79,4 +58,19 @@ $(function() {
       $("body").removeClass("layer-open");
     });
   });
+
+  $('#create-post').click(function() {
+    $('#modal').css('display', 'block');
+    $('.form-create-post').css('display', 'block');
+  })
+
+  $('#upload-image-post').on('change', function(event) {
+    var image = document.getElementById('show-image-post');
+    image.src = URL.createObjectURL(event.target.files[0]);
+  })
+
+  $('.modal-exit').click(function() {
+    $('#modal').css('display', 'none');
+    $('.form-create-post').css('display', 'none');
+  })
 });

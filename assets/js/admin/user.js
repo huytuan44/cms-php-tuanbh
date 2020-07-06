@@ -1,5 +1,14 @@
 (function ($) {
     'use strict' 
+    if (localStorage.getItem("user") == null){
+        window.location.href = "http://cms-php.local";
+    } else {
+        var user = JSON.parse(localStorage.getItem("user"));
+        if (user.type == 'user') {
+            window.location.href = "http://cms-php.local";
+        }
+        $('#username').html(user.username);
+    } 
     var data = [];
     var htmlData = '';
     $.ajax({
