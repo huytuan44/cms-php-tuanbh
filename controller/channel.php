@@ -2,7 +2,7 @@
     include('./core/controller.php');
     include('./core/connection.php');
     class Channel extends Controller {
-        private $request = '';
+        private $request = [];
         private $table = 'channel';
         public function __construct() {
             $this->request  = $_REQUEST;

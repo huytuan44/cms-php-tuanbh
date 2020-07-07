@@ -61,6 +61,37 @@
   border-radius: 20px;
   box-shadow: 5px 5px 30px white;
  }
+
+ .parrent-comment {
+    width: 100%;
+    border: 1px solid;
+    padding: 10px;
+    margin: 3px;
+    border-radius: 5px;
+    background: gray;
+    color: white;
+ }
+
+ .child-comment {
+    width: 102%;
+    border: 1px solid;
+    padding: 10px;
+    margin: 3px -13px 3px -12px;
+    border-radius: 5px;
+    background: gray;
+    color: white;
+ }
+
+ .comment-time {
+   font-size: 10px;
+ }
+
+ .comment-form {
+  width: 99%;
+  margin-left: 40px;
+  padding: 6px;
+ }
+
 :root {
   --blue: #5e50f9;
   --indigo: #6610f2;

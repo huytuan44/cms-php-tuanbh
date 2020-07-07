@@ -4,7 +4,7 @@
     include('authorization.php');
 
     class Authentication extends Controller {
-        private $request = '';
+        private $request = [];
         private $table = 'user';
         public function __construct() {
             $this->request  = $_REQUEST;

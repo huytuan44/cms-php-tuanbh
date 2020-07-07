@@ -7,10 +7,10 @@
         }  
     })
     if(!Number.isInteger(parseInt(channel_id))) {
-        window.location.href = 'http://cms-php.local';
+        window.location.href = defaultUrl;
     } else {
         $.ajax({
-            url: 'http://cms-php.local/api/getChannel',
+            url: defaultUrl + '/api/getChannel',
             type: 'GET',
             data: {
                 'channel_id': channel_id
@@ -18,7 +18,7 @@
             success: function(res) {
                 if(res.code === 200) {
                     if(typeof(res.data[0]) == 'undefined') {
-                        window.location.href = 'http://cms-php.local';
+                        window.location.href = defaultUrl;
                     } else {
                         var channel = res.data[0];
                         var posts = res.data.posts;

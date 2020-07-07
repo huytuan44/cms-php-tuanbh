@@ -1,11 +1,11 @@
 (function ($) {
     'use strict' 
     if (localStorage.getItem("user") == null){
-        window.location.href = "http://cms-php.local";
+        window.location.href = defaultUrl;
     } else {
         var user = JSON.parse(localStorage.getItem("user"));
         if (user.type == 'user') {
-            window.location.href = "http://cms-php.local";
+            window.location.href = defaultUrl;
         }
         $('#username').html(user.username);
     } 
@@ -13,7 +13,7 @@
     var htmlData = '';
     $.ajax({
         type: 'GET',
-        url: 'http://cms-php.local/api/getUser',
+        url: defaultUrl + '/api/getUser',
         success: function(res) {
             if (res.code === 200) {
                 data = res.data;
@@ -56,7 +56,7 @@
         
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/signup',
+            url: defaultUrl + '/api/signup',
             data: {
                 'username': username,
                 'password': password,
@@ -84,7 +84,7 @@
         
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/editInfo',
+            url: defaultUrl + '/api/editInfo',
             data: {
                 'user_id': userId,
                 'username': username,
@@ -109,7 +109,7 @@
         let userId = $(this).attr('data-user-id');
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/deleteUser',
+            url: defaultUrl + '/api/deleteUser',
             data: {
                 'user_id': userId
             },
@@ -132,7 +132,7 @@
 function editUser(userId) {
         $.ajax({
             type: 'GET',
-            url: 'http://cms-php.local/api/getUser',
+            url: defaultUrl + '/api/getUser',
             data: {
                 'user_id': userId 
             },

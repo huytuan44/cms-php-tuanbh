@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>World Vision</title>
+    <title>CMS</title>
     <!-- plugin css for this page -->
     <link
       rel="stylesheet"
@@ -34,24 +34,11 @@
           <!-- partial:../partials/_navbar.html -->
           <nav class="navbar navbar-expand-lg navbar-light">
               <div class="d-flex justify-content-between align-items-center navbar-top">
-                <ul class="navbar-left">
-                  <li>Wed, March 4, 2020</li>
-                  <li>30°C,London</li>
-                </ul>
                 <div>
                   <a class="navbar-brand" href="#"
-                    ><img src="../assets/images/logo.svg" alt=""
-                  /></a>
+                    ></a>
                 </div>
                 <div class="d-flex">
-                  <ul class="navbar-right">
-                    <li>
-                      <a href="#">ENGLISH</a>
-                    </li>
-                    <li>
-                      <a href="#">ESPAÑOL</a>
-                    </li>
-                  </ul>
                   <ul class="social-media">
                     <li>
                       <a href="#">
@@ -110,71 +97,49 @@
         </div>
       </header>
       <div class="container">
+        <p>Ngày xuất bản: <span class="text-center mt-5" id="post_date"></span></p>
         <div class="row">
           <div class="col-sm-12">
             <div class="text-center">
-              <h1 class="text-center mt-5" id="channel_name"></h1>
-              <!-- <p class="text-secondary fs-15 mb-5 pb-3">
-                This text can be added in the category Description field in
-                dashboard
-              </p> -->
+              <h1 class="text-center mt-5" id="post_title"></h1>
             </div>
           </div>
         </div>
         <div class="contact-wrap">
           <div class="row">
-            <div class="col-lg-6  mb-5 mb-sm-2">
-              <div class="position-relative image-hover">
+            <div class="col-lg-12" style="display: flex; flex-direction: column; align-items: center;">
+              <div class="position-relative image-hover" style="width: 100%;">
                 <img
                   id="post_image"
                   class="img-fluid"
                   alt="world-news"
+                  style="width: 100%;"
                 />
-              </div>
-            </div>
-            <div class="col-lg-6 mb-2 mb-lg-2">
-              <div class="row">
-                <div class="col-sm-12  mb-2 mb-lg-2">
-                  <h1><p id="post_title"></p></h1>
-                  <!-- <p class="mb-3">WHY CHOOSE US</p> -->
-                  <p class="mb-4">
-                  </p>
-                </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-6  mb-2 mb-lg-2">
               <p id="post_content"></p>
-              <!-- <p class="fs-15 font-weight-normal mb-4 mt-5">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.
-              </p>
-              <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum. Sed ut
-                perspiciatis unde omnis.
-              </p>
-            </div>
-            <div class="col-lg-6  mb-5 mb-sm-2">
-              <p class="fs-15 font-weight-normal mb-4 mt-5">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.
-              </p>
-              <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum. Sed ut
-                perspiciatis unde omnis.
-              </p> -->
             </div>
           </div>
+
+          <!-- start comment -->
+          <div>
+            <div><h3>Bình luận</h3></div>
+            <ul style="list-style-type: none;" id="comment-post">
+            </ul>
+            <div class="comment-form">
+              <input type="text" id="createComment" style="width: 90%; padding: 10px;">
+              <button type="button" style="padding: 10px; border-radius: 8px;" id="comment-submit">Trả lời</button>
+            </div>
+          </div>
+          <!-- end comment  -->
+
         </div>
       </div>
     </div>
+    
     <!-- container-scroller ends -->
     <!-- partial:../partials/_footer.html -->
     <footer>
@@ -182,8 +147,6 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="d-flex justify-content-between">
-                  <img src="../assets/images/logo.svg" class="footer-logo" alt="" />
-
                   <div class="d-flex justify-content-end footer-social">
                     <h5 class="m-0 font-weight-600 mr-3 d-none d-lg-flex">Follow on</h5>
                     <ul class="social-media">
@@ -250,7 +213,7 @@
     <script src="../assets/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- Custom js for this page-->
-    <!-- <script src="../assets/js/demo.js"></script> -->
+    <script src="../assets/js/global.js"></script>
     <script src="../assets/js/content/post.js"></script>
     <!-- End custom js for this page-->
   </body>

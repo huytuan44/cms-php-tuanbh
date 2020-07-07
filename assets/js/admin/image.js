@@ -1,11 +1,11 @@
 (function ($) {
     'use strict'
     if (localStorage.getItem("user") == null){
-        window.location.href = "http://cms-php.local";
+        window.location.href = defaultUrl;
     } else {
         var user = JSON.parse(localStorage.getItem("user"));
         if (user.type == 'user') {
-            window.location.href = "http://cms-php.local";
+            window.location.href = defaultUrl;
         }
         $('#username').html(user.username);
     } 
@@ -13,7 +13,7 @@
     var htmlImages = '';
     $.ajax({
         type: 'GET',
-        url: 'http://cms-php.local/api/getImage',
+        url: defaultUrl + '/api/getImage',
         success: function(res) {
             if (res.code === 200) {
                 images = res.data;

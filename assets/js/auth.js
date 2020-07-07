@@ -46,7 +46,7 @@
         let password = $('#login-password').val();
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/login',
+            url: defaultUrl + '/api/login',
             data: {
                 'username': username,
                 'password': password

@@ -1,11 +1,11 @@
 (function ($) {
     'use strict' 
     if (localStorage.getItem("user") == null){
-        window.location.href = "http://cms-php.local";
+        window.location.href = defaultUrl;
     } else {
         var user = JSON.parse(localStorage.getItem("user"));
         if (user.type == 'user') {
-            window.location.href = "http://cms-php.local";
+            window.location.href = defaultUrl;
         }
         $('#username').html(user.username);
     } 
@@ -14,7 +14,7 @@
     var htmlChannelData = '';
     $.ajax({
         type: 'GET',
-        url: 'http://cms-php.local/api/getPost',
+        url: defaultUrl + '/api/getPost',
         success: function(res) {
             if (res.code === 200) {
                 posts = res.data;
@@ -32,7 +32,7 @@
 
     $.ajax({
         type: 'GET',
-        url: 'http://cms-php.local/api/getChannel',
+        url: defaultUrl + '/api/getChannel',
         success: function(res) {
             if (res.code === 200) {
                 var data = res.data;
@@ -88,7 +88,7 @@
         fd.append('file',file);
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/uploadImage',
+            url: defaultUrl + '/api/uploadImage',
             data: fd,
             contentType: false, 
             processData: false,
@@ -109,7 +109,7 @@
         let channel_id = $('#createChannel').val();
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/createPost',
+            url: defaultUrl + '/api/createPost',
             data: {
                 'title': title,
                 'content': content,
@@ -135,7 +135,7 @@
         fd.append('file',file);
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/uploadImage',
+            url: defaultUrl + '/api/uploadImage',
             data: fd,
             contentType: false, 
             processData: false,
@@ -157,7 +157,7 @@
         let channel_id = $('#editChannel').val(); 
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/editPost',
+            url: defaultUrl + '/api/editPost',
             data: {
                 'post_id': post_id,
                 'title': title,
@@ -180,7 +180,7 @@
         let post_id = $(this).attr('data-post-id');
         $.ajax({
             type: 'POST',
-            url: 'http://cms-php.local/api/deletePost',
+            url: defaultUrl + '/api/deletePost',
             data: {
                 'post_id': post_id,
             },
@@ -196,7 +196,7 @@
 function showEditPost(post_id) {
     $.ajax({
         type: 'GET',
-        url: 'http://cms-php.local/api/getPost',
+        url: defaultUrl + '/api/getPost',
         data: { 
             'post_id': post_id
         },

@@ -1,0 +1,1 @@
+window.defaultUrl = "http://cms-php.local";
