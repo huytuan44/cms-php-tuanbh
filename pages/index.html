@@ -109,23 +109,32 @@
       <!-- end form đăng ký -->
 
       <!-- form tao bai viet moi  -->
-      <div class="form-create-post">
+      <div class="form-create-post" style="display: block !important;">
         <fieldset>
           <legend>Tạo bài viết mới</legend>
           <div class="row p-1">
             <div class="col-sm-2">
               <lable for="title-post">Tiêu đề:</lable> 
             </div>
-            <div class="col-sm-10">
-              <input type="text" id="title-post" placeholder="Nhập tên bài viết" style="width: 80%;">
+            <div class="form-group col-sm-10">
+              <input class="form-control" type="text" id="title-post" placeholder="Nhập tên bài viết" style="width: 80%;">
             </div>
           </div>
           <div class="row p-1">
             <div class="col-sm-2">
               <lable for="content-post">Nội dung:</lable> 
             </div>
-            <div class="col-sm-10">
-              <textarea type="text" id="content-post" placeholder="Nhập nội dung" rows="10" style="width: 100%;"></textarea>
+            <div class="form-group col-sm-10">
+              <textarea class="form-control" type="text" id="content-post" placeholder="Nhập nội dung" rows="10" style="width: 100%;"></textarea>
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-sm-2">
+              <label for="channel-post">Kênh: </label>
+            </div>
+            <div class="form-group col-sm-10">
+              <select class="form-control p-1" name="channel-post" id="channel-post">
+              </select>
             </div>
           </div>
           <div class="row p-2">
@@ -133,7 +142,7 @@
               <lable for="image-post">Ảnh minh họa:</lable> 
             </div>
             <div class="col-sm-8">
-              <a href=""><label for="upload-image-post">Tải ảnh lên </label></a>
+              <a href="#"><label for="upload-image-post" style="color: aliceblue; cursor: pointer;">Tải ảnh lên </label></a>
               <div class="input-group">
                 <div class="custom-file" style="height: 200px; flex-direction: column;">
                   <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="upload-image-post"
@@ -145,7 +154,7 @@
           </div>
           <br>
           <div class="row" style="flex-direction: column; align-items: center;">
-            <p><input type =submit value= "Tạo mới"> <a href="#"><input type="button" class="modal-exit" value="Thoát" ></a></p>
+            <p><input type="button" id="create-post-submit" value= "Tạo mới"> <a href="#"><input type="button" class="modal-exit" value="Thoát" ></a></p>
           </div>
           
         </fieldset>

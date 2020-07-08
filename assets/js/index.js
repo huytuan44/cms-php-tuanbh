@@ -76,6 +76,22 @@ $(function() {
 
   $.ajax({
     type: 'GET',
+    url: defaultUrl + '/api/getChannel',
+    success: function(res) {
+      if (res.code === 200) {
+        let html = '';
+        res.data.forEach(element => {
+          html += `<option value='${element.id}'>${element.channel_name}</option>`;
+        });
+        $('#channel-post').html(html);
+      } else {
+        alert(res.status);
+      }
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
     url: defaultUrl + '/api/getPost',
     success: function(res) {
       if (res.code === 200) {
@@ -84,6 +100,47 @@ $(function() {
         alert(res.status);
       }
     }
+  })
+
+  $('#create-post-submit').click(function() {
+    let img_url = '';
+        //upload image to server and get url
+        let fd = new FormData();
+        let file = $('#upload-image-post')[0].files[0];
+        fd.append('file',file);
+        $.ajax({
+            type: 'POST',
+            url: defaultUrl + '/api/uploadImage',
+            data: fd,
+            contentType: false, 
+            processData: false,
+            success: function(res) {
+                if (res.code === 200) {
+                    let img_url = res.data;
+                    let title = $('#title-post').val();
+                    let content = $('#content-post').val();
+                    let channel = $('#channel-post').val();
+                    let user = JSON.parse(localStorage.getItem('user'));
+                    $.ajax({
+                      type: 'POST',
+                      url: defaultUrl + '/api/createPost',
+                      data: {
+                        'title': title,
+                        'content': content,
+                        'img_url': img_url,
+                        'user_id': user.id,
+                        'channel_id': channel
+                      },
+                      success: function(response) {
+                        alert(response.status);
+                      }
+                    })
+                } else {
+                    alert(res.status);
+                }   
+            }
+          });
+    
   })
 
 });
