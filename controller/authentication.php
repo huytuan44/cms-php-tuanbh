@@ -105,6 +105,23 @@
             $this->ajaxResponse('get users success', $users);
         }
 
+        public function getUserByUsername() {
+            if($_SERVER['REQUEST_METHOD'] != 'GET') {
+                $this->ajaxError();
+            }
+            $username = $this->request['username'];
+            $conn = new Connection();
+            $where = "username = '${username}'";
+            $users = $conn->select('*',$this->table, $where)->get();
+            $authoz = new Authorization();
+
+            foreach($users as $key => $value) {
+                unset($users[$key]['password']);
+                $users[$key]['type'] = $authoz->checkAdmin($value) ? 'admin' : 'user'; 
+            }
+            $this->ajaxResponse('get users success', $users);
+        }
+
         public function editUser() {
             if($_SERVER['REQUEST_METHOD'] != 'POST') {
                 $this->ajaxError();

@@ -62,10 +62,10 @@
           <legend>Đăng ký tài khoản</legend>
           <div class="row p-1">
             <div class="col-sm-4">
-              <lable for="name">Họ và tên:</lable>
+              <lable for="name">Username:</lable>
             </div>
             <div class="col-sm-8">
-              <input type="text" id="signup-firstname" placeholder="name" style="width: 80%">
+              <input type="text" id="signup-username" placeholder="username" style="width: 80%">
             </div>
           </div>
           <div class="row p-1">
@@ -73,7 +73,7 @@
               <lable for="email"> Email:</lable>
             </div>
             <div class="col-sm-8">
-              <input type="text" id="signup-email" placeholder="email" style="width: 80%">
+              <input type="text" id="signup-email" placeholder="abc@email.com" style="width: 80%">
             </div>
           </div>
           <div class="row p-1">
@@ -89,8 +89,8 @@
               <lable for="gender">Giới tính:</lable>
             </div>
             <div class="col-sm-8">
-              <input type = Radio name="control" value="1" checked>Nam 
-              <input type = Radio name="control" value="0" checked>Nữ 
+              <input type = Radio name="signup-gender" value="0" checked>Nam 
+              <input type = Radio name="signup-gender" value="1">Nữ 
             </div>
           </div> 
           <div class="row p-1">
@@ -98,14 +98,17 @@
               <lable for="age">Tuổi:</lable>
             </div>
             <div class="col-sm-8">
-              <input type="number" id="age" placeholder="age" style="width: 80%">
+              <input type="number" id="signup-age" placeholder="21" style="width: 80%">
             </div>
           </div>
           <div class="row p-2" style="align-items: center; flex-direction: column;">
-            <p><input type =submit value= "Đăng ký"> <a href="#"><input type="button" id="signup-form-exit" value="Thoát" ></a></p>
+            <p><input type="button" id="signup-form-submit" value= "Đăng ký"> <a href="#"><input type="button" id="signup-form-exit" value="Thoát" ></a></p>
           </div>
         </fieldset>
       </div>
+      <!-- end form đăng ký -->
+
+      <!-- form tao bai viet moi  -->
       <div class="form-create-post">
         <fieldset>
           <legend>Tạo bài viết mới</legend>
@@ -148,10 +151,7 @@
         </fieldset>
       </div>
     </div>
-    
-
-   
-
+    <!-- end form tao bai viet moi  -->
 
     <div class="container-scroller">
       <div class="main-panel">
@@ -167,9 +167,9 @@
                 <div>
                   <a class="navbar-brand align-items-center" href="#">
                     <H1 >SWEN</H1>
-                    <!-- <img src="assets/images/logo.svg" alt=""/> -->
                   </a>
                 </div>
+                <p>Xin chào <span id='username'></span></p>
               </div>
               <div class="navbar-bottom-menu">
                 <button

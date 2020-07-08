@@ -73,4 +73,17 @@ $(function() {
     $('#modal').css('display', 'none');
     $('.form-create-post').css('display', 'none');
   })
+
+  $.ajax({
+    type: 'GET',
+    url: defaultUrl + '/api/getPost',
+    success: function(res) {
+      if (res.code === 200) {
+
+      } else {
+        alert(res.status);
+      }
+    }
+  })
+
 });

@@ -55,24 +55,26 @@
           </li>`
         }
 
-        $.ajax({
-            type: 'GET',
-            url: defaultUrl + '/api/getComments',
-            data: {
-                'post_id': post_id
-            },
-            success: function(res) {
-                console.log(res);
-                if (res.code === 200 && res.data.length > 0) {
-                    let comments = res.data;
-                    let html = '';
-                    comments.forEach((comment) => {
-                        html += renderComment(comment);
-                    });
-                    $('#comment-post').html(html);
+        updateComment = function() {
+            $.ajax({
+                type: 'GET',
+                url: defaultUrl + '/api/getComments',
+                data: {
+                    'post_id': post_id
+                },
+                success: function(res) {
+                    console.log(res);
+                    if (res.code === 200 && res.data.length > 0) {
+                        let comments = res.data;
+                        let html = '';
+                        comments.forEach((comment) => {
+                            html += renderComment(comment);
+                        });
+                        $('#comment-post').html(html);
+                    }
                 }
-            }
-        })
+            })    
+        }
 
         renderComment = function(comment) {
             let childHtml = '';
@@ -100,6 +102,10 @@
                 </div> 
             </li>`;
         }
+
+        updateComment();
+
+        
     }
     
 })(jQuery)

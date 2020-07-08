@@ -1,9 +1,19 @@
 <?php
     include_once('./controller/authentication.php');
     $auth = new Authentication();
-    if (!empty($_REQUEST['user_id']) || $_REQUEST['user_id'] == '0') {
-        var_dump($_REQUEST['user_id'] == 0);die;
-        $auth->getUser();
-    } else {
-        $auth->getUsers();
+    if (!empty($_REQUEST['user_id'])) {
+        if ($_REQUEST['user_id'] != '0') {
+            $auth->getUser();
+            exit;
+        }
     }
+    
+    if (!empty($_REQUEST['username'])) {
+        if ($_REQUEST['username'] != '') {
+            $auth->getUserByUsername();
+            exit;
+        }
+    }
+
+    $auth->getUsers();
+    
