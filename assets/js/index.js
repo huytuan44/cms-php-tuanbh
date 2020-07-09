@@ -162,7 +162,7 @@ $(function() {
                     if( channel.posts.length > 0) {
                       let postsHtml = '';
                       channel.posts.forEach(post => {
-                        postsHtml += `<div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
+                        postsHtml += `<div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2" onclick="window.location='${defaultUrl + '/post?post_id=' + post.id}';">
                                       <div class="position-relative image-hover">
                                         <img src="${post.img_url}" class="img-fluid" alt="${channel.channel_name}" />
                                         <span class="thumb-title">${channel.channel_name}</span>

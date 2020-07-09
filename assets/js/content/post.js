@@ -2,6 +2,10 @@
     let params = window.location.search.split('?');
     var post_id = null;
     var parent_id = 0;
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user == null) {
+        $('.comment-form').html('<p>Bạn cần phải đăng nhập để bình luận. Vui lòng quay trở lại trang <a href="../">Home</a> để đăng nhập hoặc đăng ký</p> ');
+    }
     params.forEach((item) => {
         if (item.includes('post_id')) {
             post_id = item.slice(8, item.length);
