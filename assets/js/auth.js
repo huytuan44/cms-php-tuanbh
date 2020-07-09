@@ -14,6 +14,7 @@
     $(".form-login").css('display', 'block');
     $(".form-signup").css('display', 'none');
     $('.form-create-post').css('display', 'none');
+    $('.form-create-image').css('display', 'none');
     $(".modal-custom").css('display', 'block');
   });
   $('#login-form-exit').on("click", function () {
@@ -29,6 +30,7 @@
     $(".form-signup").css('display', 'block');
     $(".form-login").css('display', 'none');
     $('.form-create-post').css('display', 'none');
+    $('.form-create-image').css('display', 'none');
     $(".modal-custom").css('display', 'block');
   });
   $('#signup-form-exit').on("click", function () {

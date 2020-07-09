@@ -25,7 +25,19 @@
 
  .form-create-post {
   display: none;
-  display: block;
+  left: 15vw;
+  top: 3vh;
+  position: fixed;
+  color: white;
+  background: grey;
+  border-radius: 7px;
+  margin: 10px;
+  padding: 25px;
+  width: 70vw;
+  box-shadow: 5px 5px 30px white;
+ }
+ .form-create-image {
+  display: none;
   left: 15vw;
   top: 15vh;
   position: fixed;

@@ -24,15 +24,11 @@
                         var posts = res.data.posts;
                         var htmlPost = '<div class="row mb-4">'
                         $('#channel_name').html(channel.channel_name.toUpperCase());
+                        $('#channel_title').html(channel.title);
                         posts.forEach((post, key) => {
-                            if(key === 0) {
-                                $('#first_post_title').html(post.title);
-                                $('#first_post_content').html(post.content);
-                                $('#first_post_image').attr('src', post.img_url);
-                            } else {
-                                htmlPost += renderPost(post);
-                                if (key % 4 === 0) { htmlPost += '</div><div class="row mb-4">'}
-                            }
+                            htmlPost += renderPost(post);
+                            if (key % 4 === 0 && key !== 0) { htmlPost += '</div><div class="row mb-4">'}
+                            
                         })
                         htmlPost +='</div>';
                         $('#post-list').html(htmlPost);
@@ -45,7 +41,7 @@
     }
     function renderPost(post) {
         return `
-        <div class="col-sm-3  mb-5 mb-sm-2">
+        <div class="col-sm-3  mb-5 mb-sm-2" onclick="window.location='${defaultUrl + '/post?post_id=' + post.id}';">
         <div class="position-relative image-hover">
           <img
             src="${post.img_url}"

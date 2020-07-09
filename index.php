@@ -1,5 +1,4 @@
 <?php
-define('BASE_URL', 'https://cms-php.local/');
 $request = $_SERVER['REQUEST_URI'];
 $path = explode("/", $request);
 if (count($path) > 2) {

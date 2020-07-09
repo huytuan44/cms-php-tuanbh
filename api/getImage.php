@@ -3,7 +3,7 @@
     include("./controller/authorization.php");
     $image = new Image();
     if (!empty($_REQUEST['image_id'])) {
-        if ($_REQUEST['image_id'] === '0') {
+        if ($_REQUEST['image_id'] !== '0') {
             $image->getImage();
             exit;
         }

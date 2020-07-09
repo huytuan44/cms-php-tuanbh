@@ -14,7 +14,7 @@
                 $this->ajaxError();
             }
             $conn = new Connection();
-            $posts = $conn->select('*', $this->table, null, $this->table.'.created_at desc')
+            $posts = $conn->select("{$this->table}.*, username, email, channel_name", $this->table, null, $this->table.'.created_at desc')
                         ->join('user', 'user_id')
                         ->join('channel', 'channel_id')
                         ->get();
@@ -29,7 +29,7 @@
             $conn = new Connection();
             $image_id = $this->request['image_id'];
             $where = $this->table.".id = {$image_id}";
-            $posts = $conn->select('*', $this->table, $where, $this->table.'.created_at desc')
+            $posts = $conn->select("{$this->table}.*, username, email, channel_name", $this->table, $where, $this->table.'.created_at desc')
                         ->join('user', 'user_id')
                         ->join('channel', 'channel_id')
                         ->get();
