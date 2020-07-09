@@ -33,7 +33,8 @@
         return `<tr>
                     <td>${image.id}</td>
                     <td>${image.title}</td>
-                    <td>${image.url}</td>
+                    <td style="white-space:nowrap; text-overflow:ellipsis; max-width:400px; overflow:hidden;">
+                        ${image.url}</td>
                     <td>${image.username}</td>
                     <td>${image.channel_name}</td>
                     <td>${image.created_at}</td>

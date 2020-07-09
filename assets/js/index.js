@@ -153,7 +153,7 @@ $(function() {
           html += `<div class="world-news">
                     <div class="row">
                       <div class="col-sm-12">
-                        <div class="d-flex position-relative  float-left">
+                        <div class="d-flex position-relative float-left" onclick="window.location='${defaultUrl + '/channel?id=' + channel.id}';">
                           <h3 class="section-title">${channel.channel_name}</h3>
                         </div>
                       </div>
