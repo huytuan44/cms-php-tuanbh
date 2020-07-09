@@ -27,4 +27,29 @@
     public function getComments() {
 
     }
+
+    public function createComment() {
+        if($_SERVER['REQUEST_METHOD'] != 'POST') {
+            $this->ajaxError();
+        }
+        $parrent_comment= +$this->request['parrent'];
+        $content = $this->request['status'];
+        $user_id = $this->request['user_id'];
+        $post_id = $this->request['post_id'];
+        if(empty($user_id) || empty($post_id) || empty($content)) {
+            $this->ajaxError();
+        }
+        
+        $conn = new Connection();
+        $collumns = array('parrent_comment', 'content', 'user_id', 'post_id');
+        $comment = array(
+            $parrent_comment,
+            $content,
+            $user_id,
+            $post_id
+        );
+        $results = $conn->insert($this->table, $collumns, $comment);
+        
+        $results ? $this->ajaxResponse('created post success') : $this->ajaxError('created post error');
+    }
  }    

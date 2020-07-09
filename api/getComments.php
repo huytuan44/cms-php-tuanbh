@@ -8,5 +8,3 @@
             exit;
         }
     }
-
-    $comment->getComments();

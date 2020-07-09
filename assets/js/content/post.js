@@ -1,6 +1,7 @@
 (function ($) {
     let params = window.location.search.split('?');
-    let post_id = null;
+    var post_id = null;
+    var parent_id = 0;
     params.forEach((item) => {
         if (item.includes('post_id')) {
             post_id = item.slice(8, item.length);
@@ -87,6 +88,7 @@
                 <div class="parrent-comment">
                     <div class="comment-time">${comment.created_at}</div>
                     ${comment.username}: ${comment.content}
+                    <div style="text-align: end;"><a class="answer-comment" onclick="getParentId(${comment.id})" href="#commentStatus" style="color: white;">Trả lời</a></div>
                 </div> 
                 <ul style="list-style-type: none;">
                   ${childHtml}
@@ -103,8 +105,38 @@
             </li>`;
         }
 
+        createComment = function(status, parent) {
+            let user = JSON.parse(localStorage.getItem('user'));
+            $.ajax({
+                type: 'post',
+                url: defaultUrl + '/api/createComment',
+                data: {
+                    'status': status,
+                    'parrent': parent,
+                    'user_id': user.id,
+                    'post_id': post_id
+                },
+                success: function(res) {
+                    if (res.code === 200) {
+                        parent_id = 0;
+                        updateComment();
+                    } else alert(res.status);
+                }
+            })
+        }
+
         updateComment();
 
+        //create comment
+        $('#comment-submit').click(function() {
+            let status = $('#commentStatus').val();
+            createComment(status, parent_id);
+            $('#commentStatus').val('');
+        })
+
+        getParentId = function(commentId) {
+            parent_id = commentId;
+        }
         
     }
     
