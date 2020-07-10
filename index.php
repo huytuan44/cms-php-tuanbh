@@ -18,7 +18,10 @@ switch ($path[1]) {
         break;
     case 'channel':
         require __DIR__ . '/pages/channel.html';
-        break;        
+        break;
+    case 'image':
+        require __DIR__ . '/pages/image.html';
+        break;            
     case 'about':
         require __DIR__ . '/pages/about.php';
         break;

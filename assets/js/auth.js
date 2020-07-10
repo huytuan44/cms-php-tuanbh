@@ -60,8 +60,10 @@
           $('.login-success').css('display', 'block');
           $(".form-login").css('display', 'none');
           $('#modal').css('display', 'none');
-          localStorage.setItem('user', JSON.stringify(res.data));
-          $('#username').html(res.data.username);
+          let currentUser = res.data;
+          localStorage.setItem('user', JSON.stringify(currentUser));
+          $('#username').html(currentUser.username);
+          if (currentUser.type !== 'admin') $('#admin-page').css('display', 'none');
         }
         else {
           alert(res.status);
@@ -116,9 +118,10 @@
       },
       success: function(res) {
         if(res.code === 200) {
-          let user = res.data[0];
-          localStorage.setItem('user', JSON.stringify(user));
-          $('#username').html(user.username);
+          let currentUser = res.data[0];
+          localStorage.setItem('user', JSON.stringify(currentUser));
+          $('#username').html(currentUser.username);
+          if (currentUser.type != 'admin') $('#admin-page').css('display', 'none');
         } else {
           alert(res.status);
         }

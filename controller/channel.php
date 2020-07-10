@@ -43,6 +43,18 @@
             $this->ajaxResponse('get channels success', $channels);
         }
 
+        public function getChannelsWithImage() {
+            if($_SERVER['REQUEST_METHOD'] != 'GET') {
+                $this->ajaxError();
+            }
+            $conn = new Connection();
+            $channels = $conn->select('*', $this->table)->get();
+            foreach($channels as $key => $channel) {
+                $channels[$key]['images'] = $conn->select('*', 'image', "channel_id={$channel['id']}")->get();
+            }
+            $this->ajaxResponse('get channels success', $channels);
+        }
+
         public function createChannel() {
             if($_SERVER['REQUEST_METHOD'] != 'POST') {
                 $this->ajaxError();

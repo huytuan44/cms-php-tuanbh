@@ -145,7 +145,7 @@ $(function() {
   $.ajax({
     type: 'GET',
     url: defaultUrl + '/api/getChannel',
-    data: { 'status': 1 },
+    data: { 'status': 'post' },
     success: function(res) {
       if (res.code === 200) {
         let html = '';

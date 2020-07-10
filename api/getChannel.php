@@ -9,8 +9,14 @@
         }
     }
     if (!empty($_REQUEST['status'])) { 
-        if ($_REQUEST['status'] !== '0') {
+        if ($_REQUEST['status'] == 'post') {
             $channel->getChannelsWithPost();
+            exit;
+        }
+    }
+    if (!empty($_REQUEST['status'])) { 
+        if ($_REQUEST['status'] == 'image') {
+            $channel->getChannelsWithImage();
             exit;
         }
     }
