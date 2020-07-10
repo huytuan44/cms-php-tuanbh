@@ -51,12 +51,12 @@ $(function() {
   })
 
   $('#upload-image-post').on('change', function(event) {
-    var image = document.getElementById('show-image-post');
+    var image = $('#show-image-post')[0];
     image.src = URL.createObjectURL(event.target.files[0]);
   })
 
   $('#upload-image').on('change', function(event) {
-    var image = document.getElementById('show-image');
+    var image = $('#show-image')[0];
     image.src = URL.createObjectURL(event.target.files[0]);
   })
 
@@ -64,6 +64,13 @@ $(function() {
     $('#modal').css('display', 'none');
     $('.form-create-post').css('display', 'none');
     $('.form-create-image').css('display', 'none');
+    $('#title-post').val('');
+    $('#content-post').val('');
+    $('#channel-post').val(1);
+    $('#show-image-post').attr('src', '');
+    $('#title-image').val('');
+    $('#channel-image').val(1);
+    $('#show-image').attr('src', '');
   })
 
   $.ajax({
@@ -107,7 +114,7 @@ $(function() {
                         </p>
                       </div>
                       <div class="carousel-image">
-                        <img src="${element.url}" alt="" />
+                        <img src="${element.url}" alt="" style="height:300px; object-fit:contain"/>
                       </div>
                     </div>
                   </div>`;

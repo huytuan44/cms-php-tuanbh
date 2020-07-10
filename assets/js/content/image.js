@@ -22,6 +22,7 @@
                                         src="${image.url}"
                                         class="img-fluid"
                                         alt="${image.title}"
+                                        data-test-thu="aaaaaaaaaaaaaaa"
                                     />
                                     <span class="thumb-title">${channel.channel_name}</span>
                                     </div>
@@ -36,12 +37,19 @@
             $('#show-image').html(html);
             $("#show-image").popupLightbox({
                 width: 600,
-                height: 450
+                height: 600,
              });
           } else {
             alert(res.status);
           }
         }
       });
+
+      window.onclick = function (event) {
+        if (event.target == $(".popup-layout-image")[0]) {
+          $(".popup-layout-image").css('display', 'none');
+          $(".lightbox.animated.faster").css('display', 'none');
+        }
+      }
 
 })(jQuery)

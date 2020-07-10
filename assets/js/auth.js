@@ -39,8 +39,22 @@
   });
 
   window.onclick = function (event) {
-    if (event.target == document.getElementById('modal')) {
+    if (event.target == $(".modal-custom")[0]) {
       $(".modal-custom").css('display', 'none');
+      $('#signup-username').val('');
+      $('#signup-email').val('');
+      $('#signup-password').val('');
+      $("input[name='signup-gender']:checked").val(0);
+      $('#signup-age').val('');
+      $('#login-username').val('');
+      $('#login-password').val('');
+      $('#title-post').val('');
+      $('#content-post').val('');
+      $('#channel-post').val(1);
+      $('#show-image-post').attr('src', '');
+      $('#title-image').val('');
+      $('#channel-image').val(1);
+      $('#show-image').attr('src', '');
     }
   }
 

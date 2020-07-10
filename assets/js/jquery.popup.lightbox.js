@@ -17,6 +17,8 @@
 			
 			var target = $(this);
 
+			var popupWindowLayout = $div();
+
 			var popupWindow = $section();
 
 			var closeBtn = $button();
@@ -32,13 +34,12 @@
 			var capBar = $figcaption();
 
 			var imgs = $(target).find("img");
-			
 			var totalImgs = imgs.length;
 
 			var imgNum = 0;
 			var current, thisCaption;
 
-
+			
 			$(nextBtn).addClass("btn-next")
 				.appendTo(popupWindow);
 
@@ -56,8 +57,9 @@
 			$(imgFig).addClass("img-show")
 				.appendTo(popupWindow);
 
-			$(popupWindow).addClass("lightbox animated faster " + setting.inAnimation).appendTo("body");
-
+			$(popupWindow).addClass("lightbox animated faster " + setting.inAnimation).appendTo(popupWindowLayout);
+			
+			$(popupWindowLayout).addClass("popup-layout-image").appendTo("body");
 			//set up unique number for each image 
 
 			for (var i = 0; i < imgs.length; i++) {
@@ -70,34 +72,7 @@
 
 			}
 
-			if ($(window).width() > 620) {
-
-
-				$(popupWindow).css({
-					'width': setting.width,
-					'height': setting.height,
-					'position': 'fixed',
-					'top': '50%',
-					'marginTop': -(setting.height / 2),
-					'left': '50%',
-					'marginLeft': -(setting.width / 2),
-					'zIndex': '999',
-					'overflow': 'hidden',
-
-				});
-
-			} else {
-				$(popupWindow).css({
-					'width': '100%',
-					'height': '100%',
-					'top': 0,
-					'left': 0,
-
-
-				});
-
-
-			}
+			$changeSection(setting.width, setting.height)
 
 
 			$(capBar).addClass("img-caption animated fadeInUp");
@@ -107,6 +82,8 @@
 				var thisImg = $(this).clone();
 				var thisNum = $(this).attr("data-num") * 1;
 				var $caption = $(this).attr('alt');
+				$changeSection(thisImg[0].width, thisImg[0].height);
+				$(".popup-layout-image").css('display', 'block');
 				if ($(this).prop('alt') == false) {
 					$caption = "This image has no caption";
 				}
@@ -157,7 +134,7 @@
 					'left': '-100%',
 					'opacity': 0,
 				}, 200, function () {
-
+					$changeSection($(imgs).eq(imgNum)[0].naturalWidth, $(imgs).eq(imgNum)[0].naturalHeight);
 					$(imgFig).html($(imgs).eq(imgNum).clone());
 
 					current = $(imgFig).find("img");
@@ -193,6 +170,7 @@
 					'right': '-100%',
 					'opacity': 0,
 				}, 200, function () {
+					$changeSection($(imgs).eq(imgNum)[0].naturalWidth, $(imgs).eq(imgNum)[0].naturalHeight);
 					$(imgFig).html($(imgs).eq(imgNum).clone());
 
 					current = $(imgFig).find("img");
@@ -237,12 +215,51 @@
 
 			}
 
+			function $changeSection(width, height) {
+				let screenWidth = window.screen.width - 120;
+				let screenHeight = window.screen.height - 120;
+				if (height > screenHeight) {
+					width = width*screenHeight/height;
+					height = screenHeight;
+				}
+				if (width > screenWidth) {
+					height = height*screenWidth/width;
+					width = screenWidth;
+				}
+				if ($(window).width() > 620) {
+
+
+					$(popupWindow).css({
+						'width': width,
+						'height': height,
+						'position': 'fixed',
+						'top': '50%',
+						'marginTop': -(height / 2),
+						'left': '50%',
+						'marginLeft': -(width / 2),
+						'zIndex': '999',
+						'overflow': 'hidden',
+	
+					});
+	
+				} else {
+					$(popupWindow).css({
+						'width': '100%',
+						'height': '100%',
+						'top': 0,
+						'left': 0,
+	
+	
+					});
+	
+	
+				}
+			}
 
 			$(".btn-close").click(function () {
 				$(this).parent().fadeOut();
+				$(".popup-layout-image").css('display', 'none');
 				imgNum = 0;
-
-
 			});
 
 
