@@ -238,6 +238,10 @@ $(function () {
               'channel_id': channel
             },
             success: function (response) {
+              $('#title-post').val('');
+              $('#content-post').val('');
+              $('#channel-post').val(1);
+              $('#show-image-post').removeAttr('src');
               alert(response.status);
             }
           })
@@ -288,6 +292,10 @@ $(function () {
         'channel_id': channel
       },
       success: function (response) {
+        $('#title-image').val('');
+        $('#channel-image').val('1');
+        $('#show-image').removeAttr('src');
+        $('#url-image').val('');
         alert(response.status);
       }
     })
