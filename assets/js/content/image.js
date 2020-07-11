@@ -16,13 +16,12 @@
                             </div><div class="row mb-4">`;
                     channel.images.forEach((image, key) => {
                         if (key%4 == 0 && key != 0) html += '</div><div class="row mb-4">';
-                        html += `<div class="col-sm-3  mb-5 mb-sm-2">
-                                    <div class="position-relative image-hover">
+                        html += `<div class="col-sm-3 mb-5 mb-sm-2">
+                                    <div class="position-relative image-hover" style="background: antiquewhite;">
                                     <img
                                         src="${image.url}"
-                                        class="img-fluid"
+                                        class="show-img"
                                         alt="${image.title}"
-                                        data-test-thu="aaaaaaaaaaaaaaa"
                                     />
                                     <span class="thumb-title">${channel.channel_name}</span>
                                     </div>
