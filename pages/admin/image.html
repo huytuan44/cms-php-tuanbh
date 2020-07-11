@@ -149,7 +149,7 @@
       </div>
       <!-- /.close modal delete -->
 
-      <!-- modal edit post  -->
+      <!-- modal edit image  -->
       <div class="modal fade" id="editImage">
         <div class="modal-dialog">
           <div class="modal-content bg-secondary">
@@ -157,28 +157,33 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
               <div class="form-group">
-                <label for="inputEstimatedBudget">Title: </label>
-                <input type="text" id="inputEstimatedBudget" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputSpentBudget">Url: </label>
-                <input type="text" id="inputSpentBudget" class="form-control">
+                <label for="edit-image-title">Title: </label>
+                <input type="text" id="edit-image-title" class="form-control">
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="inputSpentBudget"> Channel: </label>
-                    <select class="form-control">
-                      <option>Khoa học</option>
-                      <option>Đời sống</option>
+                    <label for="edit-image-channel"> Channel: </label>
+                    <select class="form-control" id="edit-image-channel">
                     </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="image">Image: </label>
+                <a href="" id="lbImageEdit"><label for="uploadImageEdit">Tải ảnh lên </label></a>
+                <div class="input-group">
+                  <div class="custom-file" style="height: 110px; flex-direction: column;">
+                    <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="uploadImageEdit"
+                      style="display: none;">
+                      <img id="showImageEdit" height="120px" class="img-responsive" alt="Photo" />
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Dừng</button>
-              <button type="button" class="btn btn-outline-light">Lưu</button>
+              <button type="button" class="btn btn-outline-light" id="edit-image-submit">Lưu</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -194,7 +199,7 @@
             <div class="col-12">
 
               <!-- form  -->
-              <div class="card card-secondary collapsed-card">
+              <div class="card card-secondary">
                 <div class="card-header">
                   <h3 class="card-title">Create Image</h3>
 
@@ -209,18 +214,23 @@
                     <label for="inputEstimatedBudget">Title: </label>
                     <input type="text" id="inputEstimatedBudget" class="form-control">
                   </div>
-                  <div class="form-group">
-                    <label for="inputSpentBudget">Url: </label>
-                    <input type="text" id="inputSpentBudget" class="form-control">
-                  </div>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="inputSpentBudget"> Channel: </label>
-                        <select class="form-control">
-                          <option>Khoa học</option>
-                          <option>Đời sống</option>
+                        <select class="form-control" id="create-image-channel">
                         </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="image">Image: </label>
+                    <a href="" id="lbImage"><label for="uploadImage">Tải ảnh lên </label></a>
+                    <div class="input-group">
+                      <div class="custom-file" style="height: 110px; flex-direction: column;">
+                        <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="uploadImage"
+                          style="display: none;">
+                          <img id="showImage" height="120px" class="img-responsive" alt="Photo" />
                       </div>
                     </div>
                   </div>

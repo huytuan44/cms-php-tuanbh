@@ -132,29 +132,33 @@
         //upload image to server and get url
         let fd = new FormData();
         let file = $('#uploadEditImage')[0].files[0];
-        fd.append('file',file);
-        $.ajax({
-            type: 'POST',
-            url: defaultUrl + '/api/uploadImage',
-            data: fd,
-            contentType: false, 
-            processData: false,
-            success: function(res) {
-                if (res.code === 200) {
-                    img_url = res.data;
-                } else {
-                    alert(res.status);
+        if (typeof(file) == 'undefined') {
+            editPost(img_url);
+        } else {
+            fd.append('file',file);
+            $.ajax({
+                type: 'POST',
+                url: defaultUrl + '/api/uploadImage',
+                data: fd,
+                contentType: false, 
+                processData: false,
+                success: function(res) {
+                    if (res.code === 200) {
+                        img_url = res.data;
+                    } else {
+                        alert(res.status);
+                    }
+                    editPost(img_url);
                 }
-                editPost(img_url);
-            }
-          });
+            });
+        }
     }) 
     function editPost(img_url) {
-        console.log(img_url);
         let post_id = $('#editSubmit').attr('data-post-id');
         let title = $('#editTitle').val();
         let content = $('#editContent').val();
-        let channel_id = $('#editChannel').val(); 
+        let channel_id = $('#editChannel').val();
+        let user = JSON.parse(localStorage.getItem('user')); 
         $.ajax({
             type: 'POST',
             url: defaultUrl + '/api/editPost',
@@ -163,7 +167,7 @@
                 'title': title,
                 'content': content,
                 'channel_id': channel_id,
-                'user_id': '1',
+                'user_id': user.id,
                 'img_url': img_url.length ? '../' + img_url : ''
             },
             success: function(res) {
@@ -173,7 +177,7 @@
                     alert(res.status);
                 }  
             }
-          });
+        });
     } 
 
     $('#submitDeletePost').click(function() {
