@@ -1,10 +1,10 @@
 
-$(function() {
+$(function () {
 
   // owl carousel script starts
 
   // scroll header script here
-  window.onscroll = function() {
+  window.onscroll = function () {
     scrollHeader();
   };
   // Get the header
@@ -21,46 +21,62 @@ $(function() {
   }
 
   // navbar toggler script
-  $(".navbar-toggler").on("click", function() {
+  $(".navbar-toggler").on("click", function () {
     $(".collapse").toggleClass("show");
     $("body").toggleClass("layer-open");
     // $(header).toggleClass("sticky-not");
     $(".navbar-close").show();
   });
-  $(".navbar-close").on("click", function() {
+  $(".navbar-close").on("click", function () {
     $(".collapse").toggleClass("show");
     $(".navbar-close").hide();
     $("body").toggleClass("layer-open");
     // $(header).toggleClass("sticky-not");
-    $(".dark-overlay").click(function() {
+    $(".dark-overlay").click(function () {
       $(".collapse").removeClass("show");
       $("body").removeClass("layer-open");
     });
   });
 
-  $('#create-post').click(function() {
+  $('#create-post').click(function () {
     $('#modal').css('display', 'block');
     $('.form-create-post').css('display', 'block');
     $('.form-create-image').css('display', 'none');
   })
 
-  $('#create-image').click(function() {
+  $('#create-image').click(function () {
     $('#modal').css('display', 'block');
     $('.form-create-image').css('display', 'block');
     $('.form-create-post').css('display', 'none');
   })
 
-  $('#upload-image-post').on('change', function(event) {
+  $('#upload-image-post').on('change', function (event) {
     var image = $('#show-image-post')[0];
     image.src = URL.createObjectURL(event.target.files[0]);
   })
 
-  $('#upload-image').on('change', function(event) {
+  $('#upload-image').on('change', function (event) {
     var image = $('#show-image')[0];
     image.src = URL.createObjectURL(event.target.files[0]);
   })
 
-  $('.modal-exit').click(function() {
+  $("input[name='getImageType']").on('change', function (event) {
+    let upload = $('#upload-img-layout');
+    let getUrl = $('#get-url-img-layout');
+    if (getUrl.css('display') === 'none') {
+      upload.css('display', 'none');
+      getUrl.css('display', 'block');
+    } else {
+      upload.css('display', 'block');
+      getUrl.css('display', 'none');
+    }
+  })
+
+  $("#url-image").change(function (event) {
+    $('#show-image-by-url').attr('src', $(this).val());
+  })
+
+  $('.modal-exit').click(function () {
     $('#modal').css('display', 'none');
     $('.form-create-post').css('display', 'none');
     $('.form-create-image').css('display', 'none');
@@ -76,7 +92,7 @@ $(function() {
   $.ajax({
     type: 'GET',
     url: defaultUrl + '/api/getChannel',
-    success: function(res) {
+    success: function (res) {
       if (res.code === 200) {
         let html = '';
         res.data.forEach(element => {
@@ -93,10 +109,11 @@ $(function() {
   $.ajax({
     type: 'GET',
     url: defaultUrl + '/api/getImage',
-    success: function(res) {
+    success: function (res) {
       if (res.code === 200) {
         let html = '';
-        res.data.forEach(element => {
+        let images = res.data;
+        images.slice(0,5).forEach(element => {
           html += `<div class="item">
                     <div class="carousel-content-wrapper mb-2">
                       <div class="carousel-content">
@@ -120,7 +137,7 @@ $(function() {
                   </div>`;
         });
 
-        
+
         $('#main-banner-carousel').html(html)
         if ($("#main-banner-carousel").length) {
           $("#main-banner-carousel").owlCarousel({
@@ -153,7 +170,7 @@ $(function() {
     type: 'GET',
     url: defaultUrl + '/api/getChannel',
     data: { 'status': 'post' },
-    success: function(res) {
+    success: function (res) {
       if (res.code === 200) {
         let html = '';
         res.data.forEach(channel => {
@@ -166,10 +183,10 @@ $(function() {
                       </div>
                     </div>
                     <div class="row">`;
-                    if( channel.posts.length > 0) {
-                      let postsHtml = '';
-                      channel.posts.forEach(post => {
-                        postsHtml += `<div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2" onclick="window.location='${defaultUrl + '/post?post_id=' + post.id}';">
+          if (channel.posts.length > 0) {
+            let postsHtml = '';
+            channel.posts.forEach(post => {
+              postsHtml += `<div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2" onclick="window.location='${defaultUrl + '/post?post_id=' + post.id}';">
                                       <div class="position-relative image-hover">
                                         <img src="${post.img_url}" class="img-fluid" alt="${channel.channel_name}" />
                                         <span class="thumb-title">${channel.channel_name}</span>
@@ -182,91 +199,97 @@ $(function() {
                                       </p>
                                       <a href="${'/post?post_id=' + post.id}" class="font-weight-bold text-dark pt-2">Đọc tiếp</a>
                                     </div>`
-                      })
-                      html+= postsHtml + '</div>';
-                    }
-                     
+            })
+            html += postsHtml + '</div>';
+          }
+
         });
         $('#channel-list').html(html);
       } else alert(res.status);
     }
   })
 
-  $('#create-post-submit').click(function() {
-        //upload image to server and get url
-        let fd = new FormData();
-        let file = $('#upload-image-post')[0].files[0];
-        fd.append('file',file);
-        $.ajax({
+  $('#create-post-submit').click(function () {
+    //upload image to server and get url
+    let fd = new FormData();
+    let file = $('#upload-image-post')[0].files[0];
+    fd.append('file', file);
+    $.ajax({
+      type: 'POST',
+      url: defaultUrl + '/api/uploadImage',
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: function (res) {
+        if (res.code === 200) {
+          let img_url = res.data;
+          let title = $('#title-post').val();
+          let content = $('#content-post').val();
+          let channel = $('#channel-post').val();
+          let user = JSON.parse(localStorage.getItem('user'));
+          $.ajax({
             type: 'POST',
-            url: defaultUrl + '/api/uploadImage',
-            data: fd,
-            contentType: false, 
-            processData: false,
-            success: function(res) {
-                if (res.code === 200) {
-                    let img_url = res.data;
-                    let title = $('#title-post').val();
-                    let content = $('#content-post').val();
-                    let channel = $('#channel-post').val();
-                    let user = JSON.parse(localStorage.getItem('user'));
-                    $.ajax({
-                      type: 'POST',
-                      url: defaultUrl + '/api/createPost',
-                      data: {
-                        'title': title,
-                        'content': content,
-                        'img_url': img_url,
-                        'user_id': user.id,
-                        'channel_id': channel
-                      },
-                      success: function(response) {
-                        alert(response.status);
-                      }
-                    })
-                } else {
-                    alert(res.status);
-                }   
+            url: defaultUrl + '/api/createPost',
+            data: {
+              'title': title,
+              'content': content,
+              'img_url': img_url,
+              'user_id': user.id,
+              'channel_id': channel
+            },
+            success: function (response) {
+              alert(response.status);
             }
-          });
-    
+          })
+        } else {
+          alert(res.status);
+        }
+      }
+    });
+
   })
 
-  $('#create-image-submit').click(function() {
-        //upload image to server and get url
-        let fd = new FormData();
-        let file = $('#upload-image')[0].files[0];
-        fd.append('file',file);
-        $.ajax({
-            type: 'POST',
-            url: defaultUrl + '/api/uploadImage',
-            data: fd,
-            contentType: false, 
-            processData: false,
-            success: function(res) {
-                if (res.code === 200) {
-                    let img_url = res.data;
-                    let title = $('#title-image').val();
-                    let channel = $('#channel-image').val();
-                    let user = JSON.parse(localStorage.getItem('user'));
-                    $.ajax({
-                      type: 'POST',
-                      url: defaultUrl + '/api/createImage',
-                      data: {
-                        'title': title,
-                        'img_url': img_url,
-                        'user_id': user.id,
-                        'channel_id': channel
-                      },
-                      success: function(response) {
-                        alert(response.status);
-                      }
-                    })
-                } else {
-                    alert(res.status);
-                }   
-            }
-          });
-    
+  $('#create-image-submit').click(function () {
+    if ($("input[name='getImageType']:checked").val() == '2') {
+      saveImage($('#url-image').val());
+    } else {
+      //upload image to server and get url
+      let fd = new FormData();
+      let file = $('#upload-image')[0].files[0];
+      fd.append('file', file);
+      $.ajax({
+        type: 'POST',
+        url: defaultUrl + '/api/uploadImage',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+          if (res.code === 200) {
+            saveImage(res.data);
+          } else {
+            alert(res.status);
+          }
+        }
+      });
+    }
   })
+
+  saveImage = function (img_url) {
+    let title = $('#title-image').val();
+    let channel = $('#channel-image').val();
+    let user = JSON.parse(localStorage.getItem('user'));
+    $.ajax({
+      type: 'POST',
+      url: defaultUrl + '/api/createImage',
+      data: {
+        'title': title,
+        'img_url': img_url,
+        'user_id': user.id,
+        'channel_id': channel
+      },
+      success: function (response) {
+        alert(response.status);
+      }
+    })
+  }
 });

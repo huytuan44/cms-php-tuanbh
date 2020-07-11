@@ -167,7 +167,7 @@
             <lable for="title-image">Tiêu đề:</lable>
           </div>
           <div class="form-group col-sm-10">
-            <input class="form-control" type="text" id="title-image" placeholder="Nhập tiêu đề ảnh" style="width: 80%;">
+            <input class="form-control" type="text" id="title-image" placeholder="Nhập tiêu đề ảnh">
           </div>
         </div>
         <div class="row p-1">
@@ -181,8 +181,9 @@
         </div>
         <div class="row p-2">
           <div class="col-sm-12">
-
-            <div class="input-group">
+            <label class="radio-inline"><input type="radio" name="getImageType" value="1" checked> Tải ảnh lên   </label>
+            <label class="radio-inline"><input type="radio" name="getImageType" value="2"> Thêm ảnh từ website</label> 
+            <div class="input-group p-2" id="upload-img-layout">
               <div class="custom-file" style="height: 300px; flex-direction: column;">
                 <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="upload-image"
                   style="display: none;">
@@ -191,10 +192,24 @@
                 <img id="show-image" height="280px" class="img-responsive" alt="Photo" />
               </div>
             </div>
+
+            <div class="input-group p-2" id="get-url-img-layout">
+              <div class="row">
+                <div class="col-sm-2">
+                  <lable for="url-image">Url ảnh:</lable>
+                </div>
+                <div class="form-group col-sm-10">
+                  <input class="form-control" type="text" id="url-image" placeholder="Nhập url ảnh">
+                </div>
+              </div>
+              <div class="custom-file" style="height: 300px; display: flex; flex-direction: column;">
+                <img id="show-image-by-url" height="280px" class="img-responsive" alt="Photo" />
+              </div>
+            </div>
           </div>
         </div>
-        <br>
-        <div class="row" style="flex-direction: column; align-items: center;">
+
+        <div class="row pt-2" style="flex-direction: column; align-items: center;">
           <p><input type="button" id="create-image-submit" value="Tạo mới"> <a href="#"><input type="button"
                 class="modal-exit" value="Thoát"></a></p>
         </div>

@@ -50,7 +50,7 @@
  .form-create-image {
   display: none;
   left: 15vw;
-  top: 15vh;
+  top: 8vh;
   position: fixed;
   color: white;
   background: grey;
@@ -114,6 +114,21 @@
   margin-left: 40px;
   padding: 6px;
  }
+
+ #upload-img-layout {
+   display: block;
+   -prefix-animation: slide 1s ease 3.5s forwards;
+ }
+
+ #get-url-img-layout {
+  display: none;
+  -prefix-animation: slide 1s ease 3.5s forwards;
+}
+
+@-prefix-keyframes slide {
+  from {height: 0;}
+  to {height: 300px;}
+}
 
 :root {
   --blue: #5e50f9;
