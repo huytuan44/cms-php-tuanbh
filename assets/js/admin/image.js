@@ -41,7 +41,7 @@
                     <td>${image.updated_at}</td>
                     <td>
                     <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#editImage" onclick="showEditImage(${image.id})" href="#" ><i class="fas fa-pencil-alt"></i>Edit</a>
-                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteImage" data-image-id=${image.id} href="#"><i class="fas fa-trash"></i>Delete</a>
+                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteImage" onclick = "showDeleteImage(${image.id})" href="#"><i class="fas fa-trash"></i>Delete</a>
                     </td>
                 </tr>`;
     }
@@ -128,6 +128,23 @@
             }
         });
     }
+    $('#delete-image-submit').click(function(){
+        let image_id = $('#delete-image-submit').attr('data-image-id');
+        $.ajax({
+            type: 'POST',
+            url: defaultUrl + '/api/deleteImage',
+            data: {
+                'image_id': image_id
+            },
+            success: function(res) {
+                if (res.code == 200) {
+                    location.reload();
+                } else {
+                    alert(res.status);
+                }
+            }
+        })
+    })
 })(jQuery)
 
 function showEditImage(image_id) {
@@ -151,4 +168,8 @@ function showEditImage(image_id) {
         error: function(err){
         }
     });
+}(jQuery)
+
+function showDeleteImage(image_id) {
+    $('#delete-image-submit').attr('data-image-id', image_id);  
 }(jQuery)

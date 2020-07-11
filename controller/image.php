@@ -95,7 +95,7 @@
             }
             $image_id = $this->request['image_id'];
             $conn = new Connection();
-            $results = $conn->delete($this->table, "image_id = {$image_id}");
+            $results = $conn->delete($this->table, "id = {$image_id}");
             
             $results ? $this->ajaxResponse('deleted image success!') : $this->ajaxError('deleted image error!');
         }
